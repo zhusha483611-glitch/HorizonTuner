@@ -1,0 +1,395 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    
+    <!-- Common, widely used -->
+    <system:String x:Key="Scan">扫描</system:String>
+    <system:String x:Key="Mode">模式</system:String>
+    <system:String x:Key="Value">数值</system:String>
+    <system:String x:Key="Strength">强度</system:String>
+    <system:String x:Key="Limit">限制</system:String>
+    <system:String x:Key="X">X</system:String>
+    <system:String x:Key="Y">Y</system:String>
+    <system:String x:Key="Z">Z</system:String>
+    <system:String x:Key="On">开</system:String>
+    <system:String x:Key="OnWithBrackets">(开)</system:String>
+    <system:String x:Key="Off">关</system:String>
+    <system:String x:Key="OffWithBrackets">(关)</system:String>
+    <system:String x:Key="NoClip">穿墙</system:String>
+    <system:String x:Key="Pull">拉取</system:String>
+    <system:String x:Key="Scanning">扫描中...</system:String>
+    <system:String x:Key="Min">最小</system:String>
+    <system:String x:Key="Max">最大</system:String>
+    <system:String x:Key="TranslatedBy">翻译者: </system:String>
+    
+    <!-- MainWindow.xaml - Main controls -->
+    <system:String x:Key="MA_FH5TrainerInfo">主页</system:String>
+    <system:String x:Key="Autoshow">车展/车库</system:String>
+    <system:String x:Key="SelfVehicle">自身/载具</system:String>
+    <system:String x:Key="Tuning">调校</system:String>
+    <system:String x:Key="About">关于</system:String>
+    <system:String x:Key="Settings">设置</system:String>
+    
+    <!-- MainWindow.xaml - Search feature -->
+    <system:String x:Key="SearchWatermark">搜索...</system:String>
+    
+    <!-- MainWindow.xaml - Hotkeys -->
+    <system:String x:Key="HotkeyWatermark">设置热键...</system:String>
+    
+    <!-- MainWindow.xaml - Labels -->
+    <system:String x:Key="GameTitle">游戏标题</system:String>
+    <system:String x:Key="ProcessID">进程ID</system:String>
+    <system:String x:Key="Platform">平台</system:String>
+    <system:String x:Key="Version">版本</system:String>
+    <system:String x:Key="TrainerVersion">修改器版本</system:String>
+    <system:String x:Key="GameStatus">游戏状态</system:String>
+    <system:String x:Key="Cheat">功能</system:String>
+    <system:String x:Key="SetCheatHotkey">设置功能热键</system:String>
+    <system:String x:Key="SET">设置</system:String>
+    <system:String x:Key="SaveAllHotkeys">保存所有热键</system:String>
+    <system:String x:Key="DonateToMerika">捐赠给 @merikaaaaa</system:String>
+    <system:String x:Key="CheckForUpdates">检查更新</system:String>
+    <system:String x:Key="FH5EmoteIDs">FH5 表情ID</system:String>
+    <system:String x:Key="GlowingPaintInstructions">发光车漆说明</system:String>
+    <system:String x:Key="MerikasGitHub">Merika的GitHub</system:String>
+    <system:String x:Key="CheatFreeNotice">此修改器100%免费。如果你付费购买，你被骗了。由"Merika的服务器"Discord发布。</system:String>
+    <system:String x:Key="DeveloperNotice">由Discord上的 @merikaaaaa 开发。声称是开发者的其他人都在撒谎。</system:String>
+    
+    <!-- ExpandersView.xaml - Expanders -->
+    <system:String x:Key="AutoshowExpander">车展</system:String>
+    <system:String x:Key="GarageExpander">车库</system:String>
+    <system:String x:Key="SpeedhackExpander">速度修改</system:String>
+    <system:String x:Key="WheelspinsExpander">抽奖</system:String>
+    <system:String x:Key="TimerFreezesExpander">计时器冻结</system:String>
+    <system:String x:Key="WorldExpander">世界</system:String>
+    <system:String x:Key="ExperimentalExpander">实验性/不稳定</system:String>
+    <system:String x:Key="MultipliersExpander">倍率</system:String>
+    <system:String x:Key="TuningTires">调校（轮胎）</system:String>
+    <system:String x:Key="TuningGearing">调校（齿比）</system:String>
+    <system:String x:Key="TuningAlignment">调校（定位）</system:String>
+    <system:String x:Key="TuningSprings">调校（弹簧）</system:String>
+    <system:String x:Key="TuningDamping">调校（阻尼）</system:String>
+    <system:String x:Key="TuningAero">调校（空气动力）</system:String>
+    <system:String x:Key="TuningSteering">调校（转向）</system:String>
+    <system:String x:Key="TuningMiscellaneous">调校（杂项）</system:String>
+    
+    <!-- Autoshow.xaml - More strings -->
+    <system:String x:Key="AllCarsInAutoshow">车展中显示所有车辆</system:String>
+    <system:String x:Key="OnlyRareCarsInAutoshow">车展中仅显示稀有车辆</system:String>
+    <system:String x:Key="FreeCars">免费车辆</system:String>
+    
+    <!-- Unlocks.xaml -->
+    <system:String x:Key="Currency">货币：</system:String>
+    <system:String x:Key="Add">添加</system:String>
+    
+    <!-- Handling.xaml -->
+    <system:String x:Key="VelocityHotkey">速度（热键）</system:String>
+    <system:String x:Key="WheelspeedHotkey">轮速（热键）</system:String>
+    <system:String x:Key="JumpHackHotkey">跳跃修改（热键）</system:String>
+    <system:String x:Key="SuperBrakeHotkey">超级刹车（热键）</system:String>
+
+    <!-- DebugWindow.xaml -->
+    <system:String x:Key="HookFeaturesDebugList">钩子/功能调试列表</system:String>
+    <system:String x:Key="BreakpointList">断点列表</system:String>
+    <system:String x:Key="BreakpointActions">断点操作</system:String>
+    <system:String x:Key="BreakpointUnpause">继续</system:String>
+    <system:String x:Key="ReportedInfo">报告信息</system:String>
+    <system:String x:Key="AntiAntiCheat">反反作弊</system:String>
+    <system:String x:Key="DisableCrt">禁用创建远程线程检查</system:String>
+    <system:String x:Key="DisableCrc">禁用CRC检查</system:String>
+    <system:String x:Key="DisableEncryption">禁用数值加密</system:String>
+
+    <!-- MA_FH5TrainerInfo.xaml - Main controls -->
+    <system:String x:Key="FreeAndOpenSource">此工具免费且开源。如果你付费购买，你被骗了</system:String>
+    <system:String x:Key="OnlyOfficialDownload">唯一官方下载来源是GitHub仓库（可以在关于页面或右侧找到）</system:String>
+    <system:String x:Key="JoinTheDiscord">加入Discord服务器：</system:String>
+    <system:String x:Key="DiscordHyperlink">https://discord.gg/rHzev9brJ3</system:String>
+    <system:String x:Key="MainDeveloper">此软件的主要开发者是Discord上的 @merikaaaaa (859106884358635530)</system:String>
+    <system:String x:Key="AnyoneElseWhoClaims">任何声称是开发者的其他人都在撒谎</system:String>
+    <system:String x:Key="Donations">捐赠</system:String>
+    <system:String x:Key="UsefulLinks">实用链接</system:String>
+    <system:String x:Key="MerikasDiscord">Merika的Discord</system:String>
+    <system:String x:Key="GitRepository">Github仓库</system:String>
+    <system:String x:Key="Overlay">覆盖层</system:String>
+    <system:String x:Key="DebugWindow">调试窗口</system:String>
+    
+    <!-- Autoshow.xaml -->
+    <system:String x:Key="Run">运行</system:String>
+    
+    <system:String x:Key="RemoveAll">全部</system:String>
+    <system:String x:Key="RemoveDupes">重复</system:String>
+    <system:String x:Key="RemoveNonFavorites">非收藏</system:String>
+    <system:String x:Key="RemoveUnTuned">仅未调校</system:String>
+    <system:String x:Key="RemoveNonLivery">无涂装</system:String>
+    
+    <system:String x:Key="AutoshowFilters">车展筛选</system:String>
+    <system:String x:Key="AutoshowFiltersAllCars">显示所有车辆</system:String>
+    <system:String x:Key="AutoshowFiltersRareCars">仅显示稀有车辆</system:String>
+    <system:String x:Key="AutoshowFiltersFreeCars">免费车辆</system:String>
+
+    <system:String x:Key="GarageModifications">车库修改</system:String>
+    <system:String x:Key="GarageModificationsUnlockHiddenPresets">解锁隐藏预设</system:String>
+    <system:String x:Key="GarageModificationsRemoveBarnFindCars">移除谷仓发现车辆</system:String>
+    <system:String x:Key="GarageModificationsDlcCarsReleaseDateBypass">DLC车辆发布日期绕过</system:String>
+    <system:String x:Key="GarageModificationsClearNewTagOnCars">清除车辆新标签</system:String>
+    <system:String x:Key="GarageModificationsClearGarage">清空车库</system:String>
+    <system:String x:Key="GarageModificationsFixCarThumbnails">修复车辆缩略图</system:String>
+    
+    <system:String x:Key="OtherModifications">其他修改</system:String>
+    <system:String x:Key="OtherModificationsFreePerfUpgrades">免费性能升级</system:String>
+    <system:String x:Key="OtherModificationsFreeVisualUpgrades">免费外观升级</system:String>
+    <system:String x:Key="OtherModificationsQuickAddAllCars">快速添加所有车辆</system:String>
+    <system:String x:Key="OtherModificationsQuickAddRareCars">快速添加稀有车辆</system:String>
+    
+    <!-- SelfVehicle.xaml -->
+    <system:String x:Key="Handling">操控</system:String>
+    <system:String x:Key="Unlocks">解锁</system:String>
+    <system:String x:Key="PhotoMode">拍照模式</system:String>
+    <system:String x:Key="Environment">环境</system:String>
+    <system:String x:Key="Customization">自定义</system:String>
+    <system:String x:Key="Miscellaneous">杂项</system:String>
+    <system:String x:Key="Camera">相机</system:String>
+
+    <!-- Handling.xaml -->
+    <system:String x:Key="Velocity">速度</system:String>
+    <system:String x:Key="Wheelspeed">轮速</system:String>
+    <system:String x:Key="Acceleration">加速</system:String>
+    <system:String x:Key="Gravity">重力</system:String>
+    <system:String x:Key="JumpHack">跳跃修改</system:String>
+    <system:String x:Key="FlyHack">飞行修改</system:String>
+    <system:String x:Key="FlyHackRotSpeed">旋转速度</system:String>
+    <system:String x:Key="FlyHackMovSpeed">移动速度</system:String>
+    <system:String x:Key="StopAllWheels">锁定所有车轮</system:String>
+    <system:String x:Key="SuperBrake">超级刹车</system:String>
+    <system:String x:Key="SuperCar">超级车</system:String>
+    <system:String x:Key="NoWaterDrag">无水阻力</system:String>
+    
+    <system:String x:Key="Static">静态</system:String>
+    <system:String x:Key="Linear">线性</system:String>
+
+    <!-- Unlocks.xaml -->
+    <system:String x:Key="Xp">经验值</system:String>
+    <system:String x:Key="Credits">金币</system:String>
+    <system:String x:Key="SkillPoints">技能点</system:String>
+    <system:String x:Key="Wheelspins">抽奖</system:String>
+    <system:String x:Key="SeriesPoints">系列点数</system:String>
+    <system:String x:Key="SeasonalPoints">赛季点数</system:String>
+    <system:String x:Key="Accolades">荣誉</system:String>
+    <system:String x:Key="Kudos">声望</system:String>
+    <system:String x:Key="ForzathonPoints">Forzathon点数</system:String>
+    <system:String x:Key="CarXp">车辆经验</system:String>
+    <system:String x:Key="CarPoints">车辆点数</system:String>
+    <system:String x:Key="FreeClothing">免费服装</system:String>
+    
+    <!-- Customization.xaml -->
+    <system:String x:Key="GlowingPaint">发光车漆</system:String>
+    <system:String x:Key="HeadlightColour">车灯颜色</system:String>
+    <system:String x:Key="ForceLod">强制LOD（可能崩溃）</system:String>
+    <system:String x:Key="Cleanliness">清洁度</system:String>
+    <system:String x:Key="BackfireTime">回火时间</system:String>
+    <system:String x:Key="MinTime">最短时间</system:String>
+    <system:String x:Key="MaxTime">最长时间</system:String>
+    <system:String x:Key="Dirt">灰尘</system:String>
+    <system:String x:Key="Mud">泥土</system:String>
+    
+    <!-- Environment.xaml -->
+    <system:String x:Key="SunRgb">太阳RGB</system:String>
+    <system:String x:Key="Color">颜色</system:String>
+    <system:String x:Key="Intensity">强度</system:String>
+    <system:String x:Key="AidsMode">辅助模式</system:String>
+    <system:String x:Key="FreezeAi">冻结AI</system:String>
+    <system:String x:Key="ManualTime">手动时间</system:String>
+    
+    <!-- Misc.xaml -->
+    <system:String x:Key="NameSpoofer">名称伪装</system:String>
+    <system:String x:Key="SpinPrizeScale">抽奖奖品倍率</system:String>
+    <system:String x:Key="SpinSellFactor">抽奖出售系数</system:String>
+    <system:String x:Key="SkillScoreMultiplier">技能分数倍率</system:String>
+    <system:String x:Key="DriftScoreMultiplier">漂移分数倍率</system:String>
+    <system:String x:Key="SkillTreeCost">技能树消耗</system:String>
+    <system:String x:Key="SkillTreeWideEdit">技能树广泛编辑</system:String>
+    <system:String x:Key="MissionTimeScale">任务时间倍率</system:String>
+    <system:String x:Key="TrailblazerTimeScale">探路者时间倍率</system:String>
+    <system:String x:Key="SpeedZoneMultiplier">限速区倍率</system:String>
+    <system:String x:Key="RaceTimeScale">比赛时间倍率</system:String>
+    <system:String x:Key="DangerSignMultiplier">危险标志倍率</system:String>
+    <system:String x:Key="SpeedTrapMultiplier">测速点倍率</system:String>
+    <system:String x:Key="DroneModeHeight">无人机模式最大高度倍率</system:String>
+    <system:String x:Key="RemoveBuildCap">移除建造上限</system:String>
+    <system:String x:Key="UnbreakableSkillScore">无限技能连击</system:String>
+    <system:String x:Key="AutoTpToWaypoint">自动传送到航点</system:String>
+
+    <!-- PhotoMode.xaml -->
+    <system:String x:Key="ModifiersRequireScanning">拍照模式修改器需要扫描</system:String>
+    <system:String x:Key="Samples">采样</system:String>
+    <system:String x:Key="ApertureScale">光圈比例</system:String>
+    <system:String x:Key="CarInFocus">对焦车辆</system:String>
+    <system:String x:Key="TimeSlice">时间切片</system:String>
+    <system:String x:Key="TurnSpeed">转向速度</system:String>
+    <system:String x:Key="MoveSpeed">移动速度</system:String>
+    <system:String x:Key="SamplesMultiplier">采样倍率</system:String>
+    <system:String x:Key="NoHeightLimits">无高度限制</system:String>
+    <system:String x:Key="IncreasedZoom">增强变焦</system:String>
+    
+    <!-- Camera.xaml -->
+    <system:String x:Key="FovLock">视野锁定</system:String>
+    <system:String x:Key="CameraOffset">相机偏移</system:String>
+    <system:String x:Key="FovLimitersRequireScanning">视野限制器需要扫描</system:String>
+    <system:String x:Key="Chase">追逐</system:String>
+    <system:String x:Key="ChaseFar">远追逐</system:String>
+    <system:String x:Key="Driver">驾驶员</system:String>
+    <system:String x:Key="Dashboard">仪表盘</system:String>
+    <system:String x:Key="Hood">引擎盖</system:String>
+    <system:String x:Key="Bumper">保险杠</system:String>
+    
+    <!-- Tuning.xaml -->
+    <system:String x:Key="Tires">调校（轮胎）</system:String>
+    <system:String x:Key="Gearing">调校（齿比）</system:String>
+    <system:String x:Key="Alignment">调校（定位）</system:String>
+    <system:String x:Key="Springs">调校（弹簧）</system:String>
+    <system:String x:Key="Damping">调校（阻尼）</system:String>
+    <system:String x:Key="Aero">调校（空气动力）</system:String>
+    <system:String x:Key="Steering">调校（转向）</system:String>
+    <system:String x:Key="Other">调校（杂项）</system:String>
+    
+    <!-- Tires.xaml -->
+    <system:String x:Key="FrontLeftTirePressure">左前胎压</system:String>
+    <system:String x:Key="FrontRightTirePressure">右前胎压</system:String>
+    <system:String x:Key="RearLeftTirePressure">左后胎压</system:String>
+    <system:String x:Key="RearRightTirePressure">右后胎压</system:String>
+    <system:String x:Key="Psi">磅/平方英寸</system:String>
+    <system:String x:Key="Bar">巴</system:String>
+    
+    <!-- Gearing.xaml -->
+    <system:String x:Key="FinalDriveRatio">终传比</system:String>
+    <system:String x:Key="ReverseGear">倒挡</system:String>
+    <system:String x:Key="FirstGear">一挡</system:String>
+    <system:String x:Key="SecondGear">二挡</system:String>
+    <system:String x:Key="ThirdGear">三挡</system:String>
+    <system:String x:Key="FourthGear">四挡</system:String>
+    <system:String x:Key="FifthGear">五挡</system:String>
+    <system:String x:Key="SixthGear">六挡</system:String>
+    <system:String x:Key="SeventhGear">七挡</system:String>
+    <system:String x:Key="EighthGear">八挡</system:String>
+    <system:String x:Key="NinthGear">九挡</system:String>
+    <system:String x:Key="TenthGear">十挡</system:String>
+    
+    <!-- Alignment.xaml -->
+    <system:String x:Key="NegativeCamber">负外倾角</system:String>
+    <system:String x:Key="PositiveCamber">正外倾角</system:String>
+    <system:String x:Key="NegativeToe">负前束</system:String>
+    <system:String x:Key="PositiveToe">正前束</system:String>
+    
+    <!-- Springs.xaml -->
+    <system:String x:Key="FrontSpringsMin">前弹簧最小值</system:String>
+    <system:String x:Key="FrontSpringsMax">前弹簧最大值</system:String>
+    <system:String x:Key="RearSpringsMin">后弹簧最小值</system:String>
+    <system:String x:Key="RearSpringsMax">后弹簧最大值</system:String>
+    <system:String x:Key="FrontRideHeightMin">前悬挂高度最小值</system:String>
+    <system:String x:Key="FrontRideHeightMax">前悬挂高度最大值</system:String>
+    <system:String x:Key="FrontRestriction">前部限制</system:String>
+    <system:String x:Key="RearRideHeightMin">后悬挂高度最小值</system:String>
+    <system:String x:Key="RearRideHeightMax">后悬挂高度最大值</system:String>
+    <system:String x:Key="RearRestriction">后部限制</system:String>
+    <system:String x:Key="Centimeters">厘米</system:String>
+    <system:String x:Key="Inches">英寸</system:String>
+    
+    <!-- Damping.xaml -->
+    <system:String x:Key="FrontAntirollMin">前防倾杆最小值</system:String>
+    <system:String x:Key="FrontAntirollMax">前防倾杆最大值</system:String>
+    <system:String x:Key="RearAntirollMin">后防倾杆最小值</system:String>
+    <system:String x:Key="RearAntirollMax">后防倾杆最大值</system:String>
+    <system:String x:Key="FrontReboundStiffnessMin">前回弹刚度最小值</system:String>
+    <system:String x:Key="FrontReboundStiffnessMax">前回弹刚度最大值</system:String>
+    <system:String x:Key="RearReboundStiffnessMin">后回弹刚度最小值</system:String>
+    <system:String x:Key="RearReboundStiffnessMax">后回弹刚度最大值</system:String>
+    <system:String x:Key="FrontBumpStiffnessMin">前压缩刚度最小值</system:String>
+    <system:String x:Key="FrontBumpStiffnessMax">前压缩刚度最大值</system:String>
+    <system:String x:Key="RearBumpStiffnessMin">后压缩刚度最小值</system:String>
+    <system:String x:Key="RearBumpStiffnessMax">后压缩刚度最大值</system:String>
+    
+    <!-- Aero.xaml -->
+    <system:String x:Key="FrontAeroMin">前空气动力最小值</system:String>
+    <system:String x:Key="FrontAeroMax">前空气动力最大值</system:String>
+    <system:String x:Key="RearAeroMin">后空气动力最小值</system:String>
+    <system:String x:Key="RearAeroMax">后空气动力最大值</system:String>
+    
+    <!-- Steering.xaml -->
+    <system:String x:Key="AngleMax">最大转向角</system:String>
+    <system:String x:Key="AngleMax2">最大转向角2</system:String>
+    <system:String x:Key="VelocityStraight">直线速度</system:String>
+    <system:String x:Key="VelocityTurning">转弯速度</system:String>
+    <system:String x:Key="VelocityCountersteer">反打速度</system:String>
+    <system:String x:Key="VelocityDynamicPeek">动态峰值速度</system:String>
+    <system:String x:Key="TimeToMaxSteering">达到最大转向时间</system:String>
+    
+    <!-- Other.xaml -->
+    <system:String x:Key="Wheelbase">轴距</system:String>
+    <system:String x:Key="FrontWidth">前轮距</system:String>
+    <system:String x:Key="FrontSpacer">前垫片</system:String>
+    <system:String x:Key="RearWidth">后轮距</system:String>
+    <system:String x:Key="RearSpacer">后垫片</system:String>
+    <system:String x:Key="RimSizeFront">前轮毂尺寸</system:String>
+    <system:String x:Key="RimRadiusFront">前轮毂半径</system:String>
+    <system:String x:Key="RimSizeRear">后轮毂尺寸</system:String>
+    <system:String x:Key="RimRadiusRear">后轮毂半径</system:String>
+    
+    <!-- About.xaml -->
+    <system:String x:Key="ToolContributors">工具贡献者</system:String>
+    <system:String x:Key="DiscordServer">Discord服务器</system:String>
+    
+    <!-- Settings.xaml -->
+    <system:String x:Key="Appearance">外观</system:String>
+    <system:String x:Key="ChangeTheme">更改主题</system:String>
+    <system:String x:Key="MonetTheme">莫奈主题</system:String>
+    <system:String x:Key="Language">语言</system:String>
+    <system:String x:Key="English">英语</system:String>
+    <system:String x:Key="Afrikaans">南非荷兰语</system:String>
+    <system:String x:Key="Arabic">阿拉伯语</system:String>
+    <system:String x:Key="Catalan">加泰罗尼亚语</system:String>
+    <system:String x:Key="ChineseSimplified">简体中文</system:String>
+    <system:String x:Key="ChineseTraditional">繁体中文</system:String>
+    <system:String x:Key="Czech">捷克语</system:String>
+    <system:String x:Key="Danish">丹麦语</system:String>
+    <system:String x:Key="Dutch">荷兰语</system:String>
+    <system:String x:Key="Finnish">芬兰语</system:String>
+    <system:String x:Key="French">法语</system:String>
+    <system:String x:Key="German">德语</system:String>
+    <system:String x:Key="Greek">希腊语</system:String>
+    <system:String x:Key="Hebrew">希伯来语</system:String>
+    <system:String x:Key="Hungarian">匈牙利语</system:String>
+    <system:String x:Key="Italian">意大利语</system:String>
+    <system:String x:Key="Japanese">日语</system:String>
+    <system:String x:Key="Korean">韩语</system:String>
+    <system:String x:Key="Norwegian">挪威语</system:String>
+    <system:String x:Key="Polish">波兰语</system:String>
+    <system:String x:Key="Portuguese">葡萄牙语</system:String>
+    <system:String x:Key="PortugueseBrazilian">巴西葡萄牙语</system:String>
+    <system:String x:Key="Romanian">罗马尼亚语</system:String>
+    <system:String x:Key="Russian">俄语</system:String>
+    <system:String x:Key="SerbianCyrillic">塞尔维亚语（西里尔文）</system:String>
+    <system:String x:Key="SerbianLatin">塞尔维亚语（拉丁文）</system:String>
+    <system:String x:Key="Spanish">西班牙语</system:String>
+    <system:String x:Key="Swedish">瑞典语</system:String>
+    <system:String x:Key="Thai">泰语</system:String>
+    <system:String x:Key="Turkish">土耳其语</system:String>
+    <system:String x:Key="Ukrainian">乌克兰语</system:String>
+    <system:String x:Key="Vietnamese">越南语</system:String>
+
+    <!-- Theme -->
+    <system:String x:Key="ThemeToggleTooltip">切换主题</system:String>
+    <system:String x:Key="ThemeToggleIcon">🌓</system:String>
+    <system:String x:Key="LightTheme">浅色主题</system:String>
+    <system:String x:Key="DarkTheme">深色主题</system:String>
+
+    <!-- 功能模块分类 -->
+    <system:String x:Key="ModuleResourcesIcon">🏠</system:String>
+    <system:String x:Key="ModuleResourcesTitle">资源与基础功能类</system:String>
+    <system:String x:Key="ModuleCoreIcon">⚡</system:String>
+    <system:String x:Key="ModuleCoreTitle">核心体验修改类</system:String>
+    <system:String x:Key="ModuleVisualIcon">🎨</system:String>
+    <system:String x:Key="ModuleVisualTitle">玩法与视觉扩展类</system:String>
+    <system:String x:Key="ModuleTuningIcon">⚙️</system:String>
+    <system:String x:Key="ModuleTuningTitle">专业性能调校类</system:String>
+
+</ResourceDictionary>

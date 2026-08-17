@@ -1,0 +1,172 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ==================== Light Theme: Core Palette (Modern Neutral + Accessible) ==================== -->
+
+    <Color x:Key="Color.Primary.600">#2563EB</Color>
+    <Color x:Key="Color.Primary.700">#1D4ED8</Color>
+    <Color x:Key="Color.Primary.800">#1E40AF</Color>
+    <Color x:Key="Color.Primary.200">#BFDBFE</Color>
+    <Color x:Key="Color.Primary.100">#DBEAFE</Color>
+
+    <Color x:Key="Color.Neutral.0">#FFFFFF</Color>
+    <Color x:Key="Color.Neutral.50">#F8FAFC</Color>
+    <Color x:Key="Color.Neutral.100">#F1F5F9</Color>
+    <Color x:Key="Color.Neutral.200">#E2E8F0</Color>
+    <Color x:Key="Color.Neutral.300">#CBD5E1</Color>
+    <Color x:Key="Color.Neutral.400">#94A3B8</Color>
+    <Color x:Key="Color.Neutral.600">#475569</Color>
+    <Color x:Key="Color.Neutral.700">#334155</Color>
+    <Color x:Key="Color.Neutral.900">#0F172A</Color>
+
+    <Color x:Key="Color.Success.600">#16A34A</Color>
+    <Color x:Key="Color.Warning.600">#D97706</Color>
+    <Color x:Key="Color.Error.600">#DC2626</Color>
+    <Color x:Key="Color.Info.600">#0284C7</Color>
+
+    <!-- Back-compat keys (used across XAML) -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Color.Primary.600}"/>
+    <SolidColorBrush x:Key="PrimaryHoverBrush" Color="{StaticResource Color.Primary.700}"/>
+    <SolidColorBrush x:Key="PrimaryPressedBrush" Color="{StaticResource Color.Primary.800}"/>
+    <SolidColorBrush x:Key="PrimaryDisabledBrush" Color="{StaticResource Color.Primary.200}"/>
+
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Color.Info.600}"/>
+    <SolidColorBrush x:Key="SecondaryHoverBrush" Color="#0369A1"/>
+
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Color.Neutral.50}"/>
+    <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="{StaticResource Color.Neutral.100}"/>
+    <SolidColorBrush x:Key="TertiaryBackgroundBrush" Color="{StaticResource Color.Neutral.200}"/>
+    <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource Color.Neutral.0}"/>
+
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource Color.Neutral.900}"/>
+    <SolidColorBrush x:Key="SecondaryForegroundBrush" Color="{StaticResource Color.Neutral.700}"/>
+    <SolidColorBrush x:Key="TertiaryForegroundBrush" Color="{StaticResource Color.Neutral.600}"/>
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="{StaticResource Color.Neutral.400}"/>
+
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource Color.Neutral.300}"/>
+    <SolidColorBrush x:Key="BorderHoverBrush" Color="{StaticResource Color.Primary.600}"/>
+    <SolidColorBrush x:Key="BorderFocusedBrush" Color="{StaticResource Color.Primary.600}"/>
+    <SolidColorBrush x:Key="SliderTrackBrush" Color="{StaticResource Color.Neutral.300}"/>
+
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Color.Success.600}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource Color.Warning.600}"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource Color.Error.600}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource Color.Info.600}"/>
+    <SolidColorBrush x:Key="AttachedBrush" Color="{StaticResource Color.Success.600}"/>
+    <SolidColorBrush x:Key="DetachedBrush" Color="{StaticResource Color.Error.600}"/>
+
+    <!-- Auxiliary Theme Brushes -->
+    <SolidColorBrush x:Key="HyperlinkBrush" Color="{StaticResource Color.Primary.600}"/>
+    <SolidColorBrush x:Key="DonateButtonBrush" Color="{StaticResource Color.Warning.600}"/>
+    <SolidColorBrush x:Key="AuxiliaryButtonBrush" Color="{StaticResource Color.Neutral.600}"/>
+    <SolidColorBrush x:Key="SeparatorBrush" Color="{StaticResource Color.Neutral.400}"/>
+    <SolidColorBrush x:Key="ErrorForegroundBrush" Color="{StaticResource Color.Neutral.0}"/>
+
+    <!-- ==================== Semantic UI Colors (Redesigned) ==================== -->
+    
+    <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource Color.Neutral.50}"/>
+    <SolidColorBrush x:Key="TitleBarBackgroundBrush" Color="{StaticResource Color.Neutral.0}"/>
+    <SolidColorBrush x:Key="SideBarBackgroundBrush" Color="{StaticResource Color.Neutral.100}"/>
+    <SolidColorBrush x:Key="ControlBackgroundBrush" Color="{StaticResource Color.Neutral.0}"/>
+    <SolidColorBrush x:Key="InputBackgroundBrush" Color="{StaticResource Color.Neutral.0}"/>
+    <SolidColorBrush x:Key="HighlightBackgroundBrush" Color="{StaticResource Color.Neutral.50}"/>
+
+    <SolidColorBrush x:Key="HandlingInputSurfaceBrush" Color="#F4F4F4"/>
+    <SolidColorBrush x:Key="HandlingInputSurfaceHoverBrush" Color="{StaticResource Color.Neutral.50}"/>
+    <SolidColorBrush x:Key="HandlingInputSurfaceSelectedBrush" Color="{StaticResource Color.Neutral.200}"/>
+
+    <!-- MahApps accent bridge (keep the rest of MahApps styling, but align to our palette) -->
+    <SolidColorBrush x:Key="MahApps.Brushes.AccentBase" Color="{StaticResource Color.Primary.600}"/>
+    <SolidColorBrush x:Key="MahApps.Brushes.Accent" Color="{StaticResource Color.Primary.700}"/>
+    <SolidColorBrush x:Key="MahApps.Brushes.Accent2" Color="{StaticResource Color.Primary.800}"/>
+    <SolidColorBrush x:Key="MahApps.Brushes.Highlight" Color="{StaticResource Color.Primary.100}"/>
+    <SolidColorBrush x:Key="MahApps.Brushes.Control.Disabled" Color="{StaticResource Color.Neutral.200}"/>
+
+    <!-- ==================== Theme Specific Gradients & Effects ==================== -->
+
+    <!-- ==================== Theme Specific Gradients & Effects ==================== -->
+
+    <!-- Card Background Gradient: subtle, modern -->
+    <LinearGradientBrush x:Key="CardBackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="{StaticResource Color.Neutral.0}" Offset="0"/>
+        <GradientStop Color="{StaticResource Color.Neutral.50}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Glass Border Gradient -->
+    <LinearGradientBrush x:Key="CardBorderGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource Color.Primary.600}" Offset="0"/>
+        <GradientStop Color="Transparent" Offset="0.5"/>
+        <GradientStop Color="{StaticResource Color.Primary.600}" Offset="1"/>
+    </LinearGradientBrush>
+
+    <Color x:Key="ShadowColor">#1F000000</Color>
+    <Color x:Key="ShadowColorLight">#14000000</Color>
+    <Color x:Key="ShadowColorDark">#28000000</Color>
+
+    <!-- Title Gradient: keep brand warmth but reduce harshness on light background -->
+    <LinearGradientBrush x:Key="TitleGradientBrush" StartPoint="0,0" EndPoint="1,0">
+        <GradientStop Color="#DC2626" Offset="0"/>
+        <GradientStop Color="#EA580C" Offset="0.5"/>
+        <GradientStop Color="#F59E0B" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Elevation / Shadows -->
+    <DropShadowEffect x:Key="CardGlowEffect"
+                      Color="Black"
+                      BlurRadius="14"
+                      ShadowDepth="4"
+                      Direction="270"
+                      Opacity="0.10"
+                      RenderingBias="Quality"/>
+
+    <DropShadowEffect x:Key="CardGlowEffectHover"
+                      Color="Black"
+                      BlurRadius="18"
+                      ShadowDepth="6"
+                      Direction="270"
+                      Opacity="0.14"
+                      RenderingBias="Quality"/>
+
+    <DropShadowEffect x:Key="CardGlowEffectActive"
+                      Color="Black"
+                      BlurRadius="10"
+                      ShadowDepth="3"
+                      Direction="270"
+                      Opacity="0.12"
+                      RenderingBias="Quality"/>
+
+    <!-- Highlight Glow Effect -->
+    <DropShadowEffect x:Key="HighlightGlowEffect"
+                      Color="{StaticResource Color.Primary.600}"
+                      BlurRadius="16"
+                      ShadowDepth="4"
+                      Direction="270"
+                      Opacity="0.30"
+                      RenderingBias="Quality"/>
+
+    <!-- Success Glow Effect -->
+    <DropShadowEffect x:Key="SuccessGlowEffect"
+                      Color="{StaticResource Color.Success.600}"
+                      BlurRadius="12"
+                      ShadowDepth="2"
+                      Opacity="0.25"
+                      RenderingBias="Quality"/>
+
+    <!-- Error Glow Effect -->
+    <DropShadowEffect x:Key="ErrorGlowEffect"
+                      Color="{StaticResource Color.Error.600}"
+                      BlurRadius="12"
+                      ShadowDepth="2"
+                      Opacity="0.25"
+                      RenderingBias="Quality"/>
+
+    <!-- ==================== Light Theme: Component Defaults ==================== -->
+
+    <SolidColorBrush x:Key="TitleBarButtonBackgroundBrush" Color="Transparent"/>
+    <SolidColorBrush x:Key="TitleBarButtonHoverBackgroundBrush" Color="{StaticResource Color.Neutral.100}"/>
+    <SolidColorBrush x:Key="TitleBarButtonPressedBackgroundBrush" Color="{StaticResource Color.Neutral.200}"/>
+    <SolidColorBrush x:Key="TitleBarButtonForegroundBrush" Color="{StaticResource Color.Neutral.700}"/>
+    <SolidColorBrush x:Key="TitleBarButtonCloseHoverBackgroundBrush" Color="#FEE2E2"/>
+    <SolidColorBrush x:Key="TitleBarButtonCloseHoverForegroundBrush" Color="#991B1B"/>
+
+</ResourceDictionary>

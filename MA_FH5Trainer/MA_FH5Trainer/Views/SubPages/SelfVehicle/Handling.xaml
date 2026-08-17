@@ -1,0 +1,986 @@
+<Page x:Class="MA_FH5Trainer.Views.SubPages.SelfVehicle.Handling"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+      xmlns:local="clr-namespace:MA_FH5Trainer.Views.SubPages.SelfVehicle"
+      xmlns:controls="clr-namespace:MA_FH5Trainer.Controls.StatusComboboxItem"
+      mc:Ignorable="d"
+      d:DataContext="{d:DesignInstance local:Handling, IsDesignTimeCreatable= true}"
+      Title="Handling" 
+      d:DesignHeight="Auto" 
+      d:DesignWidth="800">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MA_FH5Trainer;component/Views/SubPages/SelfVehicle/HandlingResources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+        <StackPanel>
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0"
+                       Margin="2 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="RT阈值(%):"/>
+
+                <mah:NumericUpDown Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="0"
+                                   Maximum="100"
+                                   Margin="6 0 0 0"
+                                   Value="{Binding ViewModel.ThrottleTriggerThresholdPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}"/>
+
+                <Label Grid.Column="2"
+                       Margin="12 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="LT阈值(%):"/>
+
+                <mah:NumericUpDown Grid.Column="3"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="0"
+                                   Maximum="100"
+                                   Margin="6 0 0 0"
+                                   Value="{Binding ViewModel.BrakeTriggerThresholdPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}"/>
+
+                <TextBlock Grid.Column="4"
+                           Margin="12 0 0 0"
+                           VerticalAlignment="Center"
+                           Style="{StaticResource HandlingStatusTextBlockStyle}"
+                           Text="{Binding ViewModel.GamepadStatusText, Mode=OneWay}"/>
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <mah:NumericUpDown x:Name="VelocityStrength" 
+                                   Grid.Column="1"
+                                   VerticalAlignment="Center"
+                                   Value="0.10"
+                                   Minimum="0.00"
+                                   Maximum="1.00"
+                                   Interval="0.001"
+                                   Width="90"
+                                   Margin="8 0 0 0"
+                                   ValueChanged="VelocityStrength_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                            <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                            <Binding Path="IsOn" ElementName="VelSwitch"/>
+                            <Binding Path="IsOn" ElementName="VelLinearSwitch"/>
+                            <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+                
+                <Label Grid.Column="0"
+                       Margin="2 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="强度:"/>
+
+                <mah:NumericUpDown x:Name="VelocityLimit"
+                                   Grid.Column="3"
+                                   VerticalAlignment="Center"
+                                   Value="300"
+                                   Minimum="0"
+                                   Width="90"
+                                   Margin="8 0 0 0"
+                                   ValueChanged="VelocityLimit_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                            <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                            <Binding Path="IsOn" ElementName="VelSwitch"/>
+                            <Binding Path="IsOn" ElementName="VelLinearSwitch"/>
+                            <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+                
+                <Label Grid.Column="2"
+                       Margin="8 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="限制:"/>
+                
+                <StackPanel Grid.Column="4"
+                            Orientation="Horizontal"
+                            Margin="4 0 0 0">
+                    <mah:ToggleSwitch x:Name="VelSwitch"
+                                      Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                      Content="速度（RT自动）"
+                                      IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                      Toggled="VelocitySwitch_OnToggled"/>
+                    <mah:ToggleSwitch x:Name="VelChaseLimitSwitch"
+                                      Margin="10 0 0 0"
+                                      Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                      Content="追限"
+                                      IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                      Toggled="VelocityChaseLimitSwitch_OnToggled"/>
+                </StackPanel>
+
+                <mah:ToggleSwitch Grid.Column="5"
+                                  x:Name="VelLinearSwitch"
+                                  Margin="10 0 0 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="线性加速（RT自动）"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="VelocityLinearSwitch_OnToggled"/>
+
+                <Label Grid.Column="6"
+                       Margin="12 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="比例(%):"/>
+
+                <mah:NumericUpDown x:Name="VelLinearScale"
+                                   Grid.Column="7"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="5"
+                                   Maximum="100"
+                                   Margin="6 0 0 0"
+                                   Value="40"
+                                   ValueChanged="VelLinearScale_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                            <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                            <Binding Path="IsOn" ElementName="VelLinearSwitch"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+
+                <Label Grid.Column="8"
+                       Margin="12 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="曲线:"/>
+
+                <mah:NumericUpDown x:Name="VelLinearGamma"
+                                   Grid.Column="9"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="1.0"
+                                   Maximum="4.0"
+                                   Interval="0.1"
+                                   Value="2.2"
+                                   Margin="6 0 0 0"
+                                   ValueChanged="VelLinearGamma_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                            <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                            <Binding Path="IsOn" ElementName="VelLinearSwitch"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource CommonBorderStyle}" Height="Auto" ClipToBounds="True">
+            <Grid Margin="5 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <mah:ToggleSwitch Grid.Row="0" Grid.Column="0"
+                                  x:Name="VelMultiStageSwitch"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="多段式加速（RT自动）"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="VelocityMultiStageSwitch_OnToggled"/>
+
+                <Label Grid.Row="0" Grid.Column="1"
+                       Margin="12 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="预设:"/>
+
+                <ComboBox x:Name="VelocityModeComboBox"
+                          Grid.Row="0" Grid.Column="2"
+                          VerticalAlignment="Center"
+                          Width="100"
+                          Margin="6 0 0 0"
+                          SelectionChanged="VelocityModeComboBox_OnSelectionChanged"
+                          Style="{StaticResource HandlingCompactComboBoxStyle}"
+                          ItemContainerStyle="{StaticResource HandlingCompactComboBoxItemStyle}">
+                    <ComboBoxItem Content="S1车"/>
+                    <ComboBoxItem Content="S2车"/>
+                    <ComboBoxItem Content="A车"/>
+                    <ComboBoxItem Content="自定义"/>
+                </ComboBox>
+
+                <Button x:Name="SavePresetButton"
+                        Grid.Row="0" Grid.Column="3"
+                        VerticalAlignment="Center"
+                        Content="保存"
+                        Margin="10 0 0 0"
+                        Click="SavePresetButton_OnClick"
+                        Style="{StaticResource HandlingSubtleActionButtonCompactStyle}">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                            <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                            <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+
+                <Button x:Name="ManagePresetsButton"
+                        Grid.Row="0" Grid.Column="4"
+                        VerticalAlignment="Center"
+                        Content="管理"
+                        Margin="6 0 0 0"
+                        Click="ManagePresetsButton_OnClick"
+                        Style="{StaticResource HandlingSubtleActionButtonCompactStyle}">
+                    <Button.IsEnabled>
+                        <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                            <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                            <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                        </MultiBinding>
+                    </Button.IsEnabled>
+                </Button>
+
+                <WrapPanel Grid.Row="1" Grid.ColumnSpan="6"
+                           Margin="0 8 0 0"
+                           VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="分段上限:"/>
+                        <mah:NumericUpDown x:Name="VelocityMaxKmh"
+                                           VerticalAlignment="Center"
+                                           Width="120"
+                                           Interval="5"
+                                           Minimum="50"
+                                           Maximum="600"
+                                           Value="320"
+                                           Margin="8 0 0 0"
+                                           StringFormat="{}{0:N0} km/h"
+                                           ValueChanged="VelocityMaxKmh_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="S1曲线:"/>
+                        <mah:NumericUpDown x:Name="VelStage1Gamma"
+                                           VerticalAlignment="Center"
+                                           Width="80"
+                                           Interval="0.1"
+                                           Value="3.0"
+                                           Margin="8 0 0 0"
+                                           ValueChanged="VelStage1Gamma_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="S1比例:"/>
+                        <mah:NumericUpDown x:Name="VelStage1Scale"
+                                           VerticalAlignment="Center"
+                                           Width="80"
+                                           Interval="5"
+                                           Value="30"
+                                           Margin="8 0 0 0"
+                                           StringFormat="{}{0:N0}%"
+                                           ValueChanged="VelStage1Scale_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="S2曲线:"/>
+                        <mah:NumericUpDown x:Name="VelStage2Gamma"
+                                           VerticalAlignment="Center"
+                                           Width="80"
+                                           Interval="0.1"
+                                           Value="1.8"
+                                           Margin="8 0 0 0"
+                                           ValueChanged="VelStage2Gamma_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="S2比例:"/>
+                        <mah:NumericUpDown x:Name="VelStage2Scale"
+                                           VerticalAlignment="Center"
+                                           Width="80"
+                                           Interval="5"
+                                           Value="50"
+                                           Margin="8 0 0 0"
+                                           StringFormat="{}{0:N0}%"
+                                           ValueChanged="VelStage2Scale_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="S3曲线:"/>
+                        <mah:NumericUpDown x:Name="VelStage3Gamma"
+                                           VerticalAlignment="Center"
+                                           Width="80"
+                                           Interval="0.1"
+                                           Value="1.3"
+                                           Margin="8 0 0 0"
+                                           ValueChanged="VelStage3Gamma_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0 0 14 6">
+                        <Label Style="{StaticResource HandlingInlineLabelStyle}"
+                               Content="S3比例:"/>
+                        <mah:NumericUpDown x:Name="VelStage3Scale"
+                                           VerticalAlignment="Center"
+                                           Width="80"
+                                           Interval="5"
+                                           Value="70"
+                                           Margin="8 0 0 0"
+                                           StringFormat="{}{0:N0}%"
+                                           ValueChanged="VelStage3Scale_OnValueChanged"
+                                           Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                            <mah:NumericUpDown.IsEnabled>
+                                <MultiBinding Converter="{StaticResource EnabledIfAnyOnMultiConverter}">
+                                    <Binding Path="ViewModel.AreUiElementsEnabled"/>
+                                    <Binding Path="IsOn" ElementName="VelMultiStageSwitch"/>
+                                </MultiBinding>
+                            </mah:NumericUpDown.IsEnabled>
+                        </mah:NumericUpDown>
+                    </StackPanel>
+                </WrapPanel>
+
+                <mah:ToggleSwitch Grid.Row="2" Grid.Column="0"
+                                  x:Name="VelAdvancedDiagnosticsSwitch"
+                                  Margin="0 6 12 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="高级诊断"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="VelocityAdvancedDiagnosticsSwitch_OnToggled"/>
+
+                <Button Grid.Row="2" Grid.Column="1"
+                        VerticalAlignment="Center"
+                        Margin="0 6 0 0"
+                        Content="自检/修复"
+                        Click="VelocitySelfCheckButton_OnClick"
+                        IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                        Style="{StaticResource HandlingSubtleActionButtonCompactStyle}"/>
+
+                <TextBlock Grid.Row="3" Grid.ColumnSpan="6"
+                           Margin="0 6 0 0"
+                           Style="{StaticResource HandlingDiagnosticTextBlockStyle}"
+                           Text="{Binding ViewModel.VelocityDiagnosticsText, Mode=OneWay}"/>
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <ComboBox x:Name="WheelspeedModeBox" 
+                          Grid.Column="1"
+                          SelectedIndex="0"
+                          VerticalAlignment="Center"
+                          Width="90"
+                          Margin="4 0 0 0"
+                          SelectionChanged="WheelspeedModeBox_OnSelectionChanged"
+                          Style="{StaticResource HandlingCompactComboBoxStyle}"
+                          ItemContainerStyle="{StaticResource HandlingCompactComboBoxItemStyle}">
+                    <ComboBoxItem Content="{DynamicResource Static}"/>
+                    <ComboBoxItem Content="{DynamicResource Linear}"/>
+                    
+                </ComboBox>
+                
+                <Label Grid.Column="0"
+                       Margin="2 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="模式:"/>
+                
+                <mah:NumericUpDown x:Name="WheelspeedValueBox"
+                                   Grid.Column="3"
+                                   Margin="8 0 0 0"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Value="10"
+                                   Minimum="1"
+                                   Maximum="100"
+                                   ValueChanged="WheelspeedNum_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="WheelSwitch"/>
+                            <Binding Path="IsOn" ElementName="WheelSwitch"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+                
+                <Label Grid.Column="2"
+                       Margin="8 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="数值:"/>
+                
+                <mah:NumericUpDown x:Name="WheelspeedLimit" 
+                                   Grid.Column="5"
+                                   Margin="8 0 0 0"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Value="300"
+                                   Minimum="1"
+                                   Maximum="500"
+                                   ValueChanged="WheelspeedLimit_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="WheelSwitch"/>
+                            <Binding Path="IsOn" ElementName="WheelSwitch"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+                
+                <Label Grid.Column="4"
+                       Margin="8 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="限制:"/>
+                
+                <mah:ToggleSwitch Grid.Column="6"
+                                  x:Name="WheelSwitch"
+                                  Margin="4 0 0 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="轮速（RT自动）"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="WheelspeedSwitch_OnToggled"/>
+            </Grid>
+        </Border>
+        
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Slider 
+                    x:Name="AccelSlider"
+                    Minimum="100"
+                    Maximum="1000"
+                    Margin="2 0 0 0"
+                    Style="{StaticResource HandlingSliderStyle}"
+                    ValueChanged="ModifierValueBox_OnValueChanged">
+                    <Slider.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="ModifierToggleSwitch"/>
+                            <Binding Path="IsOn" ElementName="ModifierToggleSwitch"/>
+                        </MultiBinding>
+                    </Slider.IsEnabled>
+                </Slider>
+                
+                <TextBlock Grid.Column="1"
+                       Style="{StaticResource HandlingInlineValueTextBlockStyle}"
+                       Text="{Binding Value, ElementName=AccelSlider, Mode=OneWay, StringFormat={}{0:#0'%'}}"/>
+                
+                <mah:ToggleSwitch x:Name="ModifierToggleSwitch" 
+                                  Grid.Column="2"
+                                  Content="加速"
+                                  Margin="0 0 0 0"
+                                  FontStretch="Condensed"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="ModifierToggleSwitch_OnToggled"/>
+            </Grid>
+        </Border>
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <Slider 
+                    x:Name="GravValueBox"
+                    Minimum="-500"
+                    Maximum="500"
+                    Value="100"
+                    Margin="2 0 0 0"
+                    Style="{StaticResource HandlingSliderStyle}"
+                    ValueChanged="GravValueBox_OnValueChanged">
+                    <Slider.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="GravToggleSwitch"/>
+                            <Binding Path="IsOn" ElementName="GravToggleSwitch"/>
+                        </MultiBinding>
+                    </Slider.IsEnabled>
+                </Slider>
+                
+                <TextBlock Grid.Column="1"
+                       Style="{StaticResource HandlingInlineValueTextBlockStyle}"
+                       Width="40"
+                       TextAlignment="Center"
+                       Text="{Binding Value, ElementName=GravValueBox, Mode=OneWay, StringFormat={}{0:#0'%'}}"/>
+                
+                <mah:ToggleSwitch x:Name="GravToggleSwitch" 
+                                  Grid.Column="2"
+                                  Content="重力"
+                                  FontStretch="Expanded"
+                                  Margin="0 0 0 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="GravToggleSwitch_OnToggled"/>
+            </Grid>
+        </Border>
+            
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <mah:NumericUpDown Grid.Column="0"
+                                   x:Name="JmpBx"
+                                   VerticalAlignment="Center"
+                                   Minimum="1"
+                                   Maximum="15"
+                                   Value="{Binding Value, ElementName=JumpSlider}"
+                                   Width="100"
+                                   Margin="2 0 0 0"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="JumpHackToggle"/>
+                            <Binding Path="IsOn" ElementName="JumpHackToggle"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+
+                <Slider x:Name="JumpSlider" 
+                        Grid.Column="1"
+                        Minimum="1"
+                        Maximum="15"
+                        Margin="5 0 0 0"
+                        Style="{StaticResource HandlingSliderStyle}"
+                        mah:SliderHelper.EnableMouseWheel="MouseHover"
+                        AutoToolTipPlacement="{StaticResource SliderAutoToolTipPlacement}"
+                        AutoToolTipPrecision="{StaticResource SliderTooltipPrecision}"
+                        ValueChanged="JumpSlider_OnValueChanged"
+                        IsEnabled="{Binding IsEnabled, ElementName=JmpBx}"/>
+
+                <ComboBox Grid.Column="2"
+                          VerticalAlignment="Center"
+                          Margin="8 0 0 0"
+                          Width="70"
+                          SelectedItem="{Binding ViewModel.JumpButton, Mode=TwoWay}"
+                          Style="{StaticResource HandlingCompactComboBoxStyle}"
+                          ItemContainerStyle="{StaticResource HandlingCompactComboBoxItemStyle}">
+                    <ComboBox.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="JumpHackToggle"/>
+                            <Binding Path="IsOn" ElementName="JumpHackToggle"/>
+                        </MultiBinding>
+                    </ComboBox.IsEnabled>
+                    <ComboBoxItem Content="A"/>
+                    <ComboBoxItem Content="B"/>
+                    <ComboBoxItem Content="X"/>
+                    <ComboBoxItem Content="Y"/>
+                </ComboBox>
+                
+                <mah:ToggleSwitch Grid.Column="3"
+                                  x:Name="JumpHackToggle"
+                                  Margin="5 0 0 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="跳跃修改（按钮触发）"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="JumpSwitch_OnToggled"/>
+            </Grid>
+        </Border>
+        
+        <!--Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <mah:NumericUpDown Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource HandlingAccentNumericUpDownStyle}"
+                                   IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"/>
+                
+                <Label Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Margin="5 0"
+                       Content="{DynamicResource FlyHackMovSpeed}"/>
+                
+                <mah:NumericUpDown Grid.Column="2"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource HandlingAccentNumericUpDownStyle}"
+                                   IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"/>
+                
+                <Label Grid.Column="3"
+                       VerticalAlignment="Center"
+                       Margin="5 0"
+                       Content="{DynamicResource FlyHackRotSpeed}"/>
+                
+                <mah:ToggleSwitch Grid.Column="4"
+                                  VerticalAlignment="Center"
+                                  MinWidth="0"
+                                  FontSize="{DynamicResource FontSizeSmall}"
+                                  Content="{DynamicResource FlyHack}"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"/>
+                
+            </Grid>
+        </Border-->
+        
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <mah:NumericUpDown Grid.Column="0"
+                                   VerticalAlignment="Center"
+                                   x:Name="StopBox"
+                                   Minimum="1"
+                                   Margin="2 0 0 0"
+                                   Maximum="5"
+                                   Value="{Binding Value, ElementName=StopSlider}"
+                                   Width="100"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="StopToggle"/>
+                            <Binding Path="IsOn" ElementName="StopToggle"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+
+                <Slider x:Name="StopSlider" 
+                        Grid.Column="1"
+                        mah:SliderHelper.EnableMouseWheel="MouseHover"
+                        AutoToolTipPlacement="{StaticResource SliderAutoToolTipPlacement}"
+                        AutoToolTipPrecision="{StaticResource SliderTooltipPrecision}"
+                        Minimum="1"
+                        Maximum="5"
+                        Value="3"
+                        Margin="5, 0,0,0"
+                        Style="{StaticResource HandlingSliderStyle}"
+                        ValueChanged="StopSlider_OnValueChanged"
+                        IsEnabled="{Binding IsEnabled, ElementName=StopBox, Mode=OneWay}"/>
+                
+                <mah:ToggleSwitch Grid.Column="2"
+                                  x:Name="StopToggle"
+                                  Margin="5 0 0 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="超级刹车（LT自动）"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="StopSwitch_OnToggled"/>
+                
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource CommonBorderStyle}">
+            <Grid Margin="5 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Margin="2 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="日常(%):"/>
+
+                <mah:NumericUpDown Grid.Row="0"
+                                   Grid.Column="1"
+                                   x:Name="BrakeAssistNormalStrengthBox"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="0"
+                                   Maximum="100"
+                                   Margin="6 0 0 0"
+                                   ValueChanged="BrakeAssistNormalStrength_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="BrakeAssistToggle"/>
+                            <Binding Path="IsOn" ElementName="BrakeAssistToggle"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Margin="12 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="急刹阈值(%):"/>
+
+                <mah:NumericUpDown Grid.Row="0"
+                                   Grid.Column="3"
+                                   x:Name="BrakeAssistPanicThresholdBox"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="0"
+                                   Maximum="100"
+                                   Margin="6 0 0 0"
+                                   ValueChanged="BrakeAssistPanicThreshold_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="BrakeAssistToggle"/>
+                            <Binding Path="IsOn" ElementName="BrakeAssistToggle"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+
+                <Label Grid.Row="0"
+                       Grid.Column="4"
+                       Margin="12 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="急刹(%):"/>
+
+                <mah:NumericUpDown Grid.Row="0"
+                                   Grid.Column="5"
+                                   x:Name="BrakeAssistPanicStrengthBox"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="0"
+                                   Maximum="100"
+                                   Margin="6 0 0 0"
+                                   ValueChanged="BrakeAssistPanicStrength_OnValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="BrakeAssistToggle"/>
+                            <Binding Path="IsOn" ElementName="BrakeAssistToggle"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+
+                <mah:ToggleSwitch Grid.Row="0"
+                                  Grid.Column="6"
+                                  x:Name="BrakeAssistToggle"
+                                  Margin="10 0 0 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="刹车增强（LT自动）"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled, Mode=OneWay}"
+                                  Toggled="BrakeAssistSwitch_OnToggled"/>
+
+                <TextBlock Grid.Row="1"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="7"
+                           Margin="2 6 0 0"
+                           Style="{StaticResource HandlingDiagnosticTextBlockStyle}"
+                           Text="{Binding ViewModel.BrakeAssistDiagnosticsText, Mode=OneWay}"/>
+            </Grid>
+        </Border>
+        
+        <Border Style="{StaticResource CommonBorderStyle}" Height="Auto">
+            <Grid Margin="5 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/> <!-- NoWaterDrag -->
+                    <ColumnDefinition Width="Auto"/> <!-- NoClip -->
+                    <ColumnDefinition Width="Auto"/> <!-- UnbreakableSkillScore -->
+                    <ColumnDefinition Width="Auto"/> <!-- Label -->
+                    <ColumnDefinition Width="Auto"/> <!-- NumericUpDown -->
+                    <ColumnDefinition Width="Auto"/> <!-- Enable Toggle -->
+                </Grid.ColumnDefinitions>
+                
+                <mah:ToggleSwitch Grid.Column="0"
+                                  Margin="5 0 5 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="{DynamicResource NoWaterDrag}"
+                                  Toggled="NoWaterDragSwitch_OnToggled"/>
+                
+                <mah:ToggleSwitch Grid.Column="1"
+                                  Margin="5 0 5 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  Content="{DynamicResource NoClip}"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled}"
+                                  Toggled="NoClipSwitch_OnToggled"/>
+                
+                <mah:ToggleSwitch Grid.Column="2"
+                                  x:Name="QuickUnbreakableSkillScoreSwitch"
+                                  Margin="5 0 5 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled}"
+                                  Content="{DynamicResource UnbreakableSkillScore}"
+                                  Toggled="QuickUnbreakableSkillScoreSwitch_OnToggled"/>
+                
+                <Label Grid.Column="3"
+                       Margin="5 0 0 0"
+                       Style="{StaticResource HandlingInlineLabelStyle}"
+                       Content="技能分数倍率:"/>
+                
+                <mah:NumericUpDown Grid.Column="4"
+                                   x:Name="QuickSkillScoreBox"
+                                   VerticalAlignment="Center"
+                                   Width="90"
+                                   Minimum="1"
+                                   Maximum="15"
+                                   Value="1"
+                                   Margin="5 0 5 0"
+                                   ValueChanged="QuickSkillScoreBox_ValueChanged"
+                                   Style="{StaticResource HandlingCompactNumericUpDownStyle}">
+                    <mah:NumericUpDown.IsEnabled>
+                        <MultiBinding Converter="{StaticResource AndBooleanMultiConverter}">
+                            <Binding Path="IsEnabled" ElementName="QuickSkillScoreToggle"/>
+                            <Binding Path="IsOn" ElementName="QuickSkillScoreToggle"/>
+                        </MultiBinding>
+                    </mah:NumericUpDown.IsEnabled>
+                </mah:NumericUpDown>
+                
+                <mah:ToggleSwitch Grid.Column="5"
+                                  x:Name="QuickSkillScoreToggle"
+                                  Margin="5 0 5 0"
+                                  Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                  IsEnabled="{Binding ViewModel.AreUiElementsEnabled}"
+                                  Content="启用"
+                                  Toggled="QuickSkillScoreToggle_Toggled"/>
+            </Grid>
+        </Border>
+
+        <Border Style="{StaticResource CommonBorderStyle}" Height="Auto">
+            <StackPanel Margin="5 0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="QuickNameBox"
+                             Grid.Column="0"
+                             MaxLength="16"
+                             VerticalAlignment="Center"
+                             TextAlignment="Left"
+                             Style="{StaticResource HandlingCompactTextBoxStyle}"
+                             IsEnabled="{Binding ViewModel.AreUiElementsEnabled}"
+                             TextChanged="QuickNameBox_OnTextChanged"/>
+
+                    <mah:ToggleSwitch x:Name="QuickNameSpooferSwitch"
+                                      Grid.Column="1"
+                                      Margin="5 0 5 0"
+                                      Style="{StaticResource HandlingToggleSwitchCompactStyle}"
+                                      IsEnabled="{Binding ViewModel.AreUiElementsEnabled}"
+                                      Content="{DynamicResource NameSpoofer}"
+                                      Toggled="QuickNameSpooferSwitch_OnToggled"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

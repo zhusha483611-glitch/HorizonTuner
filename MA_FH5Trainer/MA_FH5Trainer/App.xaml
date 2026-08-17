@@ -1,0 +1,36 @@
+<Application x:Class="MA_FH5Trainer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:MA_FH5Trainer.Converters"
+             Startup="App_OnStartup"
+             Exit="App_OnExit">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+                
+                <!-- Design Tokens & Shared Resources -->
+                <ResourceDictionary Source="/Resources/Theme/DesignTokens.xaml" />
+                
+                <!-- Default Theme (ThemeManager will override this if needed, but good to have one loaded) -->
+                <!-- Ideally ThemeManager should load the correct one on startup. 
+                     If we include one here, ThemeManager needs to know how to replace it. 
+                     Our ThemeManager looks for "LightTheme.xaml" etc. so it should be fine. -->
+                
+                <ResourceDictionary Source="/Resources/Translations/ChineseSimplified.xaml" />
+                <ResourceDictionary Source="/Controls/StatusComboboxItem/StatusComboboxItem.xaml" />
+                <ResourceDictionary Source="/Controls/TranslationComboboxItem/TranslationComboboxItem.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:InstanceEqualsConverter x:Key="InstanceEqualsConverter"/>
+            <converters:TypeToInstanceConverter x:Key="TypeToInstanceConverter"/>
+            <converters:MultiplyConverter x:Key="MultiplyConverter"/>
+            <converters:IntParamConverter x:Key="IntParamConverter"/>
+            <converters:BoolParamConverter x:Key="BoolParamConverter"/>
+            <converters:AndBooleanMultiConverter x:Key="AndBooleanMultiConverter"/>
+            <converters:EnabledIfAnyOnMultiConverter x:Key="EnabledIfAnyOnMultiConverter"/>
+            <converters:TupleConverter x:Key="TupleConv"/>
+            <converters:IsCompactLayoutConverter x:Key="IsCompactLayoutConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
