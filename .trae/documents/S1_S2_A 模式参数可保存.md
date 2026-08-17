@@ -26,7 +26,7 @@
 - 保持现有 `_suppressVelocityModeUiEvents` 机制，避免程序回填 UI 时反向触发保存。
 
 ## 验证方式
-- 编译验证：`dotnet build MA_FH5Trainer/MA_FH5Trainer.sln -c Debug`。
+- 编译验证：`dotnet build MA_FH5Trainer/HorizonTuner.sln -c Debug`。
 - 行为验证点：
   - 选择 S1，改动一项参数→模式仍显示 S1；切换到 S2 再切回 S1→恢复为你刚才修改后的 S1 参数。
   - S2、A 同理；Custom 行为不变。

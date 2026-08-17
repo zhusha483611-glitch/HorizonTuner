@@ -1,4 +1,4 @@
-# Merika's FH5 修改器（简体中文版）
+# HorizonTuner — Forza Horizon 5 修改器（简体中文）
 
 Forza Horizon 5（`forzahorizon5.exe`）开源修改器，简体中文，基于 [MA_FH5Trainer](https://github.com/szaaamerik/MA_FH5Trainer)。
 
@@ -28,15 +28,15 @@ Forza Horizon 5（`forzahorizon5.exe`）开源修改器，简体中文，基于 
 ## 构建
 
 ```bash
-dotnet restore MA_FH5Trainer/MA_FH5Trainer.sln
-dotnet build  MA_FH5Trainer/MA_FH5Trainer.sln --configuration Debug
-dotnet run --project MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj
+dotnet restore MA_FH5Trainer/HorizonTuner.sln
+dotnet build  MA_FH5Trainer/HorizonTuner.sln --configuration Debug
+dotnet run --project MA_FH5Trainer/MA_FH5Trainer/HorizonTuner.csproj
 ```
 
 单文件自包含发布：
 
 ```bash
-dotnet publish MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj \
+dotnet publish MA_FH5Trainer/MA_FH5Trainer/HorizonTuner.csproj \
   --configuration Release --runtime win-x64 --self-contained true --output ./publish \
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 ```

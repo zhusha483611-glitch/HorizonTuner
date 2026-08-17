@@ -11,8 +11,8 @@
 ## 构建与测试
 
 ```bash
-dotnet restore MA_FH5Trainer/MA_FH5Trainer.sln
-dotnet build  MA_FH5Trainer/MA_FH5Trainer.sln --configuration Debug
+dotnet restore MA_FH5Trainer/HorizonTuner.sln
+dotnet build  MA_FH5Trainer/HorizonTuner.sln --configuration Debug
 ```
 
 > `TreatWarningsAsErrors=true`：**警告即错误**，提交前必须构建全绿。

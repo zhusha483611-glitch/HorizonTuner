@@ -30,7 +30,7 @@
 - 或在 [CarCheats.CheatLocalPlayer](../../MA_FH5Trainer/MA_FH5Trainer/Cheats/CarCheats.cs#L44-L130) 外围加 try/catch，把异常转换成 `ShowError(...)` + `return false`，避免开关初始化/自动开关触发时直接退程序。
 
 ## 验证方式
-- 编译验证：`dotnet build MA_FH5Trainer/MA_FH5Trainer.sln -c Debug`，确保无警告/错误。
+- 编译验证：`dotnet build MA_FH5Trainer/HorizonTuner.sln -c Debug`，确保无警告/错误。
 - 运行验证：
   - 启动程序并附加到 FH5。
   - 触发 `CheatLocalPlayer` 路径（例如打开 Handling 并切换轮速/跳跃开关，或让其自动开）。

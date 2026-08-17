@@ -1,4 +1,4 @@
-# MA_FH5Trainer_CN 项目指南
+# HorizonTuner 项目指南
 
 > 给未来 ZCode 代理的速查指南。详细背景见 `docs/` 与 `.trae/documents/`（按主题命名）。
 
@@ -24,12 +24,12 @@
 
 ## 构建 / 测试 / 运行
 ```bash
-dotnet restore MA_FH5Trainer/MA_FH5Trainer.sln
-dotnet build  MA_FH5Trainer/MA_FH5Trainer.sln --configuration Debug
+dotnet restore MA_FH5Trainer/HorizonTuner.sln
+dotnet build  MA_FH5Trainer/HorizonTuner.sln --configuration Debug
 # dotnet test：测试项目已移除（曾覆盖转换器/配置迁移/预设/节流动作），待重建后恢复
-dotnet run --project MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj
+dotnet run --project MA_FH5Trainer/MA_FH5Trainer/HorizonTuner.csproj
 # 单文件自包含发布：
-dotnet publish MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj \
+dotnet publish MA_FH5Trainer/MA_FH5Trainer/HorizonTuner.csproj \
   --configuration Release --runtime win-x64 --self-contained true --output ./publish \
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 ```
