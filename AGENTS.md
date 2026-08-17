@@ -12,11 +12,10 @@
 - `MA_FH5Trainer/MA_FH5Trainer/` — 主程序
   - `Cheats/` — 作弊实现；`ICheatsBase`（必须 `Cleanup`/`Reset`）、`IRevertBase`（可选，恢复原值）
   - `Services/Handling/` — Handling 模块化：`Abstractions/`（接口）`Curves/`（纯计算）`Implementations/`（落地）
-  - `Services/` — DI 服务（`ApplicationHostService`、`WindowsProviderService`、`Dialogs/`）
+  - `Services/` — DI 服务（`ApplicationHostService`、`Dialogs/`）
   - `ViewModels/`（Windows、Pages、SubPages/SelfVehicle/*）、`Views/SubPages/SelfVehicle/Handling.xaml.cs` 拆为多个 partial
   - `Models/`、`Controls/`、`Converters/`、`Resources/`（Config / Theme / Translations / Keybinds / Input）
 - `MA_FH5Trainer/Memory/` — 内存库：`Methods/`（AoB/Read/Write）、`Types/`、`Utils.cs`
-- `MA_FH5Trainer/MA_FH5Trainer.Tests/` — xUnit 测试项目
 - `MA_FH5Trainer/openspec/` — OpenSpec 规范与变更
 - `docs/` — 活跃技术文档（`.md`）；`archive/docs/` — 已过时的过程性/修复类文档（不再主动引用）
 - `.trae/documents/` — 开发复盘文档（57 个，**按主题链分组，先看 `README.md` 索引**；已过时提案归档于 `archive/trae/`）
@@ -25,14 +24,14 @@
 ```bash
 dotnet restore MA_FH5Trainer/MA_FH5Trainer.sln
 dotnet build  MA_FH5Trainer/MA_FH5Trainer.sln --configuration Debug
-dotnet test   MA_FH5Trainer/MA_FH5Trainer.sln            # xUnit：转换器/配置迁移/预设/节流动作
+# dotnet test：测试项目已移除（曾覆盖转换器/配置迁移/预设/节流动作），待重建后恢复
 dotnet run --project MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj
 # 单文件自包含发布：
 dotnet publish MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj \
   --configuration Release --runtime win-x64 --self-contained true --output ./publish \
   -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true
 ```
-- 强名称签名：`MA_FH5Trainer.snk`、`Memory.snk`。`TreatWarningsAsErrors=true`（**警告即错误**，提交前必须 `dotnet build` + `dotnet test` 全绿）。
+- 强名称签名：`MA_FH5Trainer.snk`、`Memory.snk`。`TreatWarningsAsErrors=true`（**警告即错误**，提交前必须 `dotnet build` 全绿）。
 
 ## 架构与边界
 - MVVM：`CommunityToolkit.Mvvm` 的 `[ObservableProperty]`/`[RelayCommand]` 自动生成；XAML 用 `DynamicResource` 绑定。
@@ -68,7 +67,7 @@ dotnet publish MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj \
 - 仅 Windows x64、必须 .NET 8、发布须单文件；部分功能需管理员权限；`Mutex` 保证单实例。
 - 反作弊封禁风险，项目不担责。
 - 多段式“无效果”常见原因：开关未开、扳机阈值不匹配；诊断见 `Handling.Diagnostics.cs`。自动触发基于 RT 加速 / LT 刹车，阈值用于避免自动加减速。
-- 改动后务必 `dotnet build` + `dotnet test` 通过。
+- 改动后务必 `dotnet build` 通过（测试项目已移除，待重建）。
 
 ## 敏感改动前先读
 - 多段式 / Boost / 刹车 / 预设：`.trae/documents/` 同名文档（如“分析并修复多段式加速无反应”“优化预设管理界面（…测试_文档）”“将Boost换算改为log1p_expm1数值稳定版本”）；`docs/` 技术文档（多段式加速预设系统技术文档、速度Boost算法、深浅主题规范、预设管理系列）。

@@ -30,7 +30,6 @@ Forza Horizon 5（`forzahorizon5.exe`）开源修改器，简体中文，基于 
 ```bash
 dotnet restore MA_FH5Trainer/MA_FH5Trainer.sln
 dotnet build  MA_FH5Trainer/MA_FH5Trainer.sln --configuration Debug
-dotnet test   MA_FH5Trainer/MA_FH5Trainer.sln
 dotnet run --project MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj
 ```
 

@@ -13,10 +13,10 @@
 ```bash
 dotnet restore MA_FH5Trainer/MA_FH5Trainer.sln
 dotnet build  MA_FH5Trainer/MA_FH5Trainer.sln --configuration Debug
-dotnet test   MA_FH5Trainer/MA_FH5Trainer.sln
 ```
 
-> `TreatWarningsAsErrors=true`：**警告即错误**，提交前必须构建 + 测试全绿。
+> `TreatWarningsAsErrors=true`：**警告即错误**，提交前必须构建全绿。
+> 测试项目（xUnit，曾覆盖转换器/配置迁移/预设/节流动作）已移除，待重建；重建后恢复 `dotnet test`。
 
 ## 开发规范
 
@@ -30,7 +30,7 @@ dotnet test   MA_FH5Trainer/MA_FH5Trainer.sln
 
 1. Fork 并创建功能分支。
 2. 提交信息使用简洁的英文（`fix:` / `feat:` / `chore:` 前缀）。
-3. 确保 `dotnet build` + `dotnet test` 通过。
+3. 确保 `dotnet build` 通过（测试项目已移除，待重建后恢复 `dotnet test`）。
 4. 在 PR 描述中说明改动动机、影响范围与验证结果。
 
 ## 问题报告
