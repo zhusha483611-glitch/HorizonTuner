@@ -109,7 +109,7 @@ public partial class Mem
             return false;
         }
 
-        if (!LookupPrivilegeValue(null, SE_DEBUG_NAME, out LUID luid))
+        if (!LookupPrivilegeValue(null!, SE_DEBUG_NAME, out LUID luid))
         {
             return false;
         }
