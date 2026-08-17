@@ -6,14 +6,14 @@
 - 全面检查 Handling 页面文字效果：统一字体、字号、ClearType/Display 渲染；把过小或模糊的文本提升到 FontSizeNormal。
 
 ## 现状定位（已确认）
-- RT/LT 阈值 NumericUpDown 当前使用 HandlingAccentNumericUpDownStyle（背景为 AccentBase、文字为 #000000）：[Handling.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L34-L69)
-- “名称伪装”输入框 QuickNameBox 使用 HandlingAccentTextBoxStyle（同样是 AccentBase + 黑字）：[Handling.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L970-L987)
+- RT/LT 阈值 NumericUpDown 当前使用 HandlingAccentNumericUpDownStyle（背景为 AccentBase、文字为 #000000）：[Handling.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L34-L69)
+- “名称伪装”输入框 QuickNameBox 使用 HandlingAccentTextBoxStyle（同样是 AccentBase + 黑字）：[Handling.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L970-L987)
 - 轮速组件 WheelspeedModeBox / WheelspeedValueBox / WheelspeedLimit 使用 Accent 风格，且部分 ToggleSwitch 仍手写 FontSize=12：同文件 Wheelspeed 区域与后续区块。
-- Handling 页面仍有少量 ToggleSwitch/Label 未接入统一样式，存在 12px 文本偏小的问题（例如超级刹车、刹车增强、部分快捷开关）：[Handling.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L723-L878)
+- Handling 页面仍有少量 ToggleSwitch/Label 未接入统一样式，存在 12px 文本偏小的问题（例如超级刹车、刹车增强、部分快捷开关）：[Handling.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L723-L878)
 
 ## 方案（不改动业务逻辑，仅样式/排版）
 ### 1) 为“深色主题白字可读”新增一套输入控件样式（HandlingResources）
-- 在 [HandlingResources.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/HandlingResources.xaml) 新增：
+- 在 [HandlingResources.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/HandlingResources.xaml) 新增：
   - `HandlingCompactNumericUpDownStyle`：基于 HandlingNumericUpDownStyle，保持当前页面使用习惯（宽度较窄、TextAlignment/ContentAlignment 居中、Padding 更紧凑），Foreground 使用 `ForegroundBrush`（深色主题下为白）。
   - `HandlingCompactComboBoxStyle`：基于 HandlingComboBoxStyle，保证下拉框文字与边框/背景一致，ItemContainerStyle 统一。
   - `HandlingCompactTextBoxStyle`：基于 HandlingTextBoxStyle，让 QuickNameBox/输入窗 TextBox 背景更克制（InputBackgroundBrush），文字更清晰。
@@ -36,7 +36,7 @@
 - 对未套用 `HandlingSliderStyle` 的 Slider（例如 StopSlider）补齐样式，保证轨道/Thumb 与深浅主题一致。
 
 ### 6) 同步修正输入弹窗（用于重命名预设）
-- [InputWindow.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/Windows/InputWindow.xaml) 的 InputTextBox/按钮接入 HandlingResources 的统一 TextBox/Button 样式，使“名称相关输入框”整体一致。
+- [InputWindow.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/Windows/InputWindow.xaml) 的 InputTextBox/按钮接入 HandlingResources 的统一 TextBox/Button 样式，使“名称相关输入框”整体一致。
 
 ## 影响范围
 - 仅影响 Handling 页面及与其强相关的输入弹窗/预设管理窗口的视觉，不改动任何内存写入/热键/逻辑代码。

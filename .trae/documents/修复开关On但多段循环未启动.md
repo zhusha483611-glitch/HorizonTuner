@@ -5,9 +5,9 @@
 
 ## 根因定位（代码层面）
 - Handling 加载配置时会**临时解绑 Toggled**，直接给 `VelSwitch/VelLinearSwitch/VelMultiStageSwitch.IsOn` 赋值，然后再把事件绑回去：
-  - 见 [Handling.Lifecycle.cs:L78-L86](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Lifecycle.cs#L78-L86)
+  - 见 [Handling.Lifecycle.cs:L78-L86](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Lifecycle.cs#L78-L86)
 - 因为赋值期间事件被解绑，所以不会触发 `VelocityMultiStageSwitch_OnToggled`，也就不会调用 `StartVelocityMultiStageAutoLoop()`：
-  - 启动点在 [Handling.Velocity.cs:L183-L194](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Velocity.cs#L183-L194)
+  - 启动点在 [Handling.Velocity.cs:L183-L194](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Velocity.cs#L183-L194)
 
 ## 修复方案（最小改动，直接让保存的开关在启动后“真的跑起来”）
 1) 在 `Handling_OnLoaded` 完成三开关 IsOn 赋值并重新绑定事件后：
@@ -15,7 +15,7 @@
    - 否则若线性/固定为 true，则分别调用 `VelocityLinearSwitch_OnToggled` / `VelocitySwitch_OnToggled`
    - 这样会复用现有的安全检查（手柄可用、detour 注入成功等），并启动对应后台循环，multiTick/s 立刻会变成 ~30。
 2) 顺手修正加载时 Custom 模式 MaxKmh 读取错误（之前仍指向 S2）：
-   - 见 [Handling.Lifecycle.cs:L57-L64](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Lifecycle.cs#L57-L64)
+   - 见 [Handling.Lifecycle.cs:L57-L64](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Lifecycle.cs#L57-L64)
 
 ## 验证方式（你不用猜）
 - 进游戏按住 RT：

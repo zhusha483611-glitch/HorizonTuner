@@ -27,8 +27,8 @@
 `u_throttle = clamp((rt - thr) / (255 - thr), 0, 1)`
 
 实现参考：
-- [TriggerMath](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Services/Handling/Curves/TriggerMath.cs)
-- [Handling.Automation.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Automation.cs#L196-L220)
+- [TriggerMath](../MA_FH5Trainer/MA_FH5Trainer/Services/Handling/Curves/TriggerMath.cs)
+- [Handling.Automation.cs](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Automation.cs#L196-L220)
 
 ### 2.2 车速归一化
 
@@ -42,7 +42,7 @@
 `u_speed = clamp(speed_kmh / maxKmh, 0, 1)`
 
 实现参考：
-- [TryReadSpeedKmh/CalculateVelocitySpeedU](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Automation.cs#L196-L248)
+- [TryReadSpeedKmh/CalculateVelocitySpeedU](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Automation.cs#L196-L248)
 
 ## 3. 强度语义（用户输入）
 
@@ -53,8 +53,8 @@
 其中 `B` 是基础倍率上限（按秒语义），理论范围 `[1, 2]`。
 
 实现参考：
-- [Handling.xaml 强度输入](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L86-L104)
-- [UpdateCachedVelocityValues](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L110-L116)
+- [Handling.xaml 强度输入](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml#L86-L104)
+- [UpdateCachedVelocityValues](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L110-L116)
 
 ## 4. 线性加速（按秒目标倍率）
 
@@ -70,8 +70,8 @@
 `boost_per_sec = 1 + maxΔ * scale * shaped`
 
 实现参考：
-- [VelocityCurves.CalculateLinearBoost](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Services/Handling/Curves/VelocityCurves.cs)
-- [CalculateVelocityLinearBoost](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Velocity.cs#L536-L539)
+- [VelocityCurves.CalculateLinearBoost](../MA_FH5Trainer/MA_FH5Trainer/Services/Handling/Curves/VelocityCurves.cs)
+- [CalculateVelocityLinearBoost](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Velocity.cs#L536-L539)
 
 ## 5. 多段式加速（按秒目标倍率：目标点插值）
 
@@ -107,8 +107,8 @@
 这个 `boost` 即“按车速得到的按秒目标倍率”，记作 `boost_speed_per_sec`。
 
 实现参考：
-- [VelocityCurves.CalculateMultiStageBoostWithTargets](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Services/Handling/Curves/VelocityCurves.cs)
-- [CalculateVelocityMultiStageBoost](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Velocity.cs#L541-L557)
+- [VelocityCurves.CalculateMultiStageBoostWithTargets](../MA_FH5Trainer/MA_FH5Trainer/Services/Handling/Curves/VelocityCurves.cs)
+- [CalculateVelocityMultiStageBoost](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Velocity.cs#L541-L557)
 
 ### 5.4 按油门混合（防止轻点就满）
 
@@ -117,8 +117,8 @@
 `boost_per_sec = 1 + (boost_speed_per_sec - 1) * u_throttle`
 
 实现参考：
-- [RunVelocityMultiStageAutoAsync](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Automation.cs)
-- [RunGamepadStatusAsync 诊断兜底写入](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Diagnostics.cs#L31-L112)
+- [RunVelocityMultiStageAutoAsync](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Automation.cs)
+- [RunGamepadStatusAsync 诊断兜底写入](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Diagnostics.cs#L31-L112)
 
 ## 6. 关键修正：按秒归一化写入 detour（避免复利爆炸）
 
@@ -134,8 +134,8 @@
 - `hz = hz*(1-α) + hz_inst*α`，推荐 `α = 0.2`
 
 实现参考：
-- [UpdateDetourApplyHzEstimate/GetDetourApplyHzEstimate](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L7-L51)
-- [BuildVelocityDiagnosticsText 中更新计数](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Diagnostics.cs#L198-L236)
+- [UpdateDetourApplyHzEstimate/GetDetourApplyHzEstimate](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L7-L51)
+- [BuildVelocityDiagnosticsText 中更新计数](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Diagnostics.cs#L198-L236)
 
 ### 6.2 从“按秒倍率”换算到“每次命中倍率”
 
@@ -146,7 +146,7 @@
 这样可保证在稳定 `hz` 下，连续命中 1 秒后的复利效果约等于 `boost_per_sec`。
 
 实现参考：
-- [ToBoostPerApply](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L53-L60)
+- [ToBoostPerApply](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L53-L60)
 
 ### 6.3 数值稳定的可选改进
 
@@ -156,7 +156,7 @@
 
 实现建议：
 - 若运行时提供 `log1p/expm1`，直接使用即可。
-- 若不可用，可以实现数值稳定近似：\n  - `log1p(x)`：在 `|x|` 很小时使用泰勒展开 `x - x^2/2 + x^3/3 - ...`\n  - `expm1(x)`：在 `|x|` 很小时使用泰勒展开 `x + x^2/2 + x^3/6 + ...`\n+代码实现参考（本项目已落地）：\n+- [Log1p/Expm1/ToBoostPerApply](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L53-L115)
+- 若不可用，可以实现数值稳定近似：\n  - `log1p(x)`：在 `|x|` 很小时使用泰勒展开 `x - x^2/2 + x^3/3 - ...`\n  - `expm1(x)`：在 `|x|` 很小时使用泰勒展开 `x + x^2/2 + x^3/6 + ...`\n+代码实现参考（本项目已落地）：\n+- [Log1p/Expm1/ToBoostPerApply](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L53-L115)
 
 ## 7. 诊断与可观测
 
@@ -168,8 +168,8 @@ Handling 页速度区块底部会显示 `VelocityDiagnosticsText`。开启“高
 这两个指标能直接验证“强度 0.01 不会被复利放大成火箭”。
 
 实现参考：
-- [高级诊断输出](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Diagnostics.cs)
-- [高级诊断开关配置](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Resources/Config/handlingautoconfigmanager.cs)
+- [高级诊断输出](../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.Diagnostics.cs)
+- [高级诊断开关配置](../MA_FH5Trainer/MA_FH5Trainer/Resources/Config/handlingautoconfigmanager.cs)
 
 ## 8. 调参建议（面向手感）
 

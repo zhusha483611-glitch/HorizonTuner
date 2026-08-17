@@ -21,7 +21,7 @@
 这说明“按秒归一化”之后，写入 detour 的倍率应该非常接近 1，而不是 1.001/1.0001。
 
 ## 我建议的落地改动（会改代码）
-1) 将 [ToBoostPerApply](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L53-L60) 从 `exp(log(B)/hz)` 改为：
+1) 将 [ToBoostPerApply](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.UiCache.cs#L53-L60) 从 `exp(log(B)/hz)` 改为：
    - `δ = B - 1`
    - `b = expm1( log1p(δ) / hz ) + 1`
 2) 兼容性处理：

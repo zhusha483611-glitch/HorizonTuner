@@ -2,12 +2,12 @@
 - 让多段式组件的 **S1车 / S2车 / A车** 这三个“内置模式”也能像自定义一样 **记住你当前调过的 Gamma/比例数值**，下次再选回该模式会恢复为你上次保存的值，而不是固定常量。
 
 ## 现状与问题根因
-- 目前 `ApplyVelocityPreset` 对 S1/S2/A 使用硬编码常量，见 [Handling.xaml.cs:L1428-L1474](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml.cs#L1428-L1474)。
+- 目前 `ApplyVelocityPreset` 对 S1/S2/A 使用硬编码常量，见 [Handling.xaml.cs:L1428-L1474](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml.cs#L1428-L1474)。
 - 且当前的 `VelStage*Gamma/Scale` 的 `ValueChanged` 会强制把模式切到 `Custom`（我们之前为“预设不跳回自定义”做了抑制，但逻辑仍是“用户改值=Custom”）。这会导致你在 S1/S2/A 下调整后无法“留在该模式并保存到该模式”。
 
 ## 实施方案（最小改动且兼容旧配置）
 ### 1) 扩展 HandlingAutoConfig：为 S1/S2/A 增加独立参数存储
-- 在 [handlingautoconfigmanager.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Resources/Config/handlingautoconfigmanager.cs) 的 `HandlingAutoConfig` 中新增字段：
+- 在 [handlingautoconfigmanager.cs](../../MA_FH5Trainer/MA_FH5Trainer/Resources/Config/handlingautoconfigmanager.cs) 的 `HandlingAutoConfig` 中新增字段：
   - `VelocityS1Stage1/2/3Gamma`、`VelocityS1Stage1/2/3Scale`
   - `VelocityS2Stage1/2/3Gamma`、`VelocityS2Stage1/2/3Scale`
   - `VelocityAStage1/2/3Gamma`、`VelocityAStage1/2/3Scale`
@@ -32,5 +32,5 @@
   - S2、A 同理；Custom 行为不变。
 
 ## 涉及文件
-- [handlingautoconfigmanager.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Resources/Config/handlingautoconfigmanager.cs)
-- [Handling.xaml.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml.cs)
+- [handlingautoconfigmanager.cs](../../MA_FH5Trainer/MA_FH5Trainer/Resources/Config/handlingautoconfigmanager.cs)
+- [Handling.xaml.cs](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml.cs)

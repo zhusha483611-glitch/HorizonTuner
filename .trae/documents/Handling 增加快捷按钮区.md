@@ -6,20 +6,20 @@
 
 ## 现有实现位置（用于复制）
 - 名称伪装 UI/事件：
-  - XAML： [Misc.xaml:L23-L42](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml#L23-L42)
-  - 事件逻辑： [Misc.xaml.cs:L29-L70](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml.cs#L29-L70)
-  - detour： [MiscCheats.CheatName](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Cheats/MiscCheats.cs#L45-L102)
+  - XAML： [Misc.xaml:L23-L42](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml#L23-L42)
+  - 事件逻辑： [Misc.xaml.cs:L29-L70](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml.cs#L29-L70)
+  - detour： [MiscCheats.CheatName](../../MA_FH5Trainer/MA_FH5Trainer/Cheats/MiscCheats.cs#L45-L102)
 - 无限技能连击 UI/事件：
-  - XAML： [Misc.xaml:L102-L114](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml#L102-L114)
-  - 事件逻辑： [Misc.xaml.cs:L415-L438](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml.cs#L415-L438)
-  - detour： [MiscCheats.CheatUnbreakableSkillScore](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Cheats/MiscCheats.cs#L374-L402)
+  - XAML： [Misc.xaml:L102-L114](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml#L102-L114)
+  - 事件逻辑： [Misc.xaml.cs:L415-L438](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Misc.xaml.cs#L415-L438)
+  - detour： [MiscCheats.CheatUnbreakableSkillScore](../../MA_FH5Trainer/MA_FH5Trainer/Cheats/MiscCheats.cs#L374-L402)
 - 技能分数倍率 UI/事件：
-  - XAML： [Multipliers.xaml:L166-L202](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Multipliers.xaml#L166-L202)
-  - 事件逻辑： [Multipliers.xaml.cs:L192-L227](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Multipliers.xaml.cs#L192-L227)
-  - detour： [MiscCheats.CheatSkillScoreMultiplier](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Cheats/MiscCheats.cs#L164-L192)
+  - XAML： [Multipliers.xaml:L166-L202](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Multipliers.xaml#L166-L202)
+  - 事件逻辑： [Multipliers.xaml.cs:L192-L227](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Multipliers.xaml.cs#L192-L227)
+  - detour： [MiscCheats.CheatSkillScoreMultiplier](../../MA_FH5Trainer/MA_FH5Trainer/Cheats/MiscCheats.cs#L164-L192)
 
 ## UI 方案（Handling.xaml）
-- 在 [Handling.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml) 中，“速度”Border后、其他模块前插入一个新的 Border：
+- 在 [Handling.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml) 中，“速度”Border后、其他模块前插入一个新的 Border：
   - 标题/说明：例如“快捷功能（常用）”。
   - 内含三块控件：
     1) 名称伪装：TextBox（名字输入）+ ToggleSwitch（名称伪装开关）

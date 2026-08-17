@@ -19,14 +19,14 @@
 ## 关键文件
 
 - Handling 页面 UI：
-  - [Handling.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml)
+  - [Handling.xaml](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml)
 - Handling 页面逻辑：
-  - [Handling.xaml.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml.cs)
+  - [Handling.xaml.cs](../../MA_FH5Trainer/MA_FH5Trainer/Views/SubPages/SelfVehicle/Handling.xaml.cs)
 - 配置持久化：
-  - [HandlingAutoConfigManager.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Resources/Config/HandlingAutoConfigManager.cs)
+  - [HandlingAutoConfigManager.cs](../../MA_FH5Trainer/MA_FH5Trainer/Resources/Config/HandlingAutoConfigManager.cs)
 - 新增多绑定转换器（用于“任一开关打开即可编辑输入框”）：
-  - [EnabledIfAnyOnMultiConverter.cs](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/Converters/EnabledIfAnyOnMultiConverter.cs)
-  - 资源注册：[App.xaml](file:///d:/AI/MA_FH5Trainer_CN-main/MA_FH5Trainer/MA_FH5Trainer/App.xaml)
+  - [EnabledIfAnyOnMultiConverter.cs](../../MA_FH5Trainer/MA_FH5Trainer/Converters/EnabledIfAnyOnMultiConverter.cs)
+  - 资源注册：[App.xaml](../../MA_FH5Trainer/MA_FH5Trainer/App.xaml)
 
 ## 设计目标与约束（来自需求迭代）
 

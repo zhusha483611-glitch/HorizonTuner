@@ -19,6 +19,8 @@
 - `MA_FH5Trainer/openspec/` — OpenSpec 规范与变更
 - `docs/` — 活跃技术文档（`.md`）；`archive/docs/` — 已过时的过程性/修复类文档（不再主动引用）
 - `.trae/documents/` — 开发复盘文档（57 个，**按主题链分组，先看 `README.md` 索引**；已过时提案归档于 `archive/trae/`）
+- `archive/src/` — 已归档的无引用源码类（死代码，可恢复）
+- `.github/workflows/ci.yml` — CI（Windows + .NET 8，build + test 待恢复）；`LICENSE`（GPL-3.0）、`.editorconfig`、`.gitattributes` 为规范文件
 
 ## 构建 / 测试 / 运行
 ```bash
@@ -68,6 +70,26 @@ dotnet publish MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj \
 - 反作弊封禁风险，项目不担责。
 - 多段式“无效果”常见原因：开关未开、扳机阈值不匹配；诊断见 `Handling.Diagnostics.cs`。自动触发基于 RT 加速 / LT 刹车，阈值用于避免自动加减速。
 - 改动后务必 `dotnet build` 通过（测试项目已移除，待重建）。
+
+## 开发工作流
+1. **诊断**：先读相关技术文档/复盘（见下节），用 `Handling.Diagnostics.cs` 高级诊断输出定位，勿盲改。
+2. **修改**：遵循"精准修改"——只触碰问题相关代码，匹配现有风格，不顺手重构。
+3. **验证**：`dotnet build` 全绿（警告即错误）；涉及数值/曲线改动需实机验证；测试项目已移除，重建前以手工回归清单（`docs/预设管理参数编辑回归检查清单.md`）替代。
+4. **文档同步**：修复/改动落地后，新问题写复盘到 `.trae/documents/` 并更新 `README.md` 索引；核心技术方案更新 `docs/` 对应技术文档。
+5. **提交**：小步提交，英文消息（`fix:`/`feat:`/`chore:`/`docs:` 前缀）。
+
+## 文档与归档工作流
+- **文档分层**：
+  - `docs/` — 活跃技术文档（系统设计、算法、规范、用户指南），**只放仍有效的内容**
+  - `.trae/documents/` — 开发复盘（按主题链组织），新复盘先查 `README.md` 索引避免重复
+  - `archive/docs|trae/` — 过时/已落地提案（不再主动引用，但保留可查）
+  - `archive/src/` — 死代码（无引用源码类），恢复时 `git mv` 回原目录
+- **归档纪律**：
+  - 未落地的"方案/计划"类复盘 → 归档 `archive/trae/`
+  - 已被复盘覆盖的修复类 `docs/` 文档 → 归档 `archive/docs/`
+  - 确认无引用的源码类 → 归档 `archive/src/`（先全局 grep 类名确认零引用）
+  - 归档/新增文档后**必须**同步 `.trae/documents/README.md` 索引计数
+- **链接纪律**：文档内引用源码一律用**相对路径**（如 `../../MA_FH5Trainer/MA_FH5Trainer/...`），**禁止 `file:///` 绝对路径**（跨机器失效）；提交前可用 `grep -rn "file://" --include="*.md" .` 检查。
 
 ## 敏感改动前先读
 - 多段式 / Boost / 刹车 / 预设：`.trae/documents/` 同名文档（如“分析并修复多段式加速无反应”“优化预设管理界面（…测试_文档）”“将Boost换算改为log1p_expm1数值稳定版本”）；`docs/` 技术文档（多段式加速预设系统技术文档、速度Boost算法、深浅主题规范、预设管理系列）。
