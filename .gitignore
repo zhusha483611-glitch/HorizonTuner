@@ -16,3 +16,5 @@ publish/
 
 # 发布与本地配置
 *.log
+# OMX 运行时状态
+.omo/
