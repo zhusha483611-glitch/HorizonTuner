@@ -1,8 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
- 
+
 namespace MA_FH5Trainer.Resources.Input;
- 
+
 [Flags]
 public enum XInputButtons : ushort
 {
@@ -21,7 +21,7 @@ public enum XInputButtons : ushort
     X = 0x4000,
     Y = 0x8000
 }
- 
+
 [StructLayout(LayoutKind.Sequential)]
 public struct XInputGamepad
 {
@@ -33,30 +33,30 @@ public struct XInputGamepad
     public short sThumbRX;
     public short sThumbRY;
 }
- 
+
 [StructLayout(LayoutKind.Sequential)]
 public struct XInputState
 {
     public uint dwPacketNumber;
     public XInputGamepad Gamepad;
 }
- 
+
 public static class XInput
 {
     private const uint ErrorSuccess = 0;
- 
+
     private delegate uint XInputGetStateDelegate(uint dwUserIndex, out XInputState pState);
- 
+
     private static readonly object LockObj = new();
     private static nint _libraryHandle;
     private static XInputGetStateDelegate? _getState;
     private static int? _cachedUserIndex;
- 
+
     static XInput()
     {
         TryLoadXInput();
     }
- 
+
     public static bool IsAvailable
     {
         get
@@ -67,7 +67,7 @@ public static class XInput
             }
         }
     }
- 
+
     public static int? CurrentUserIndex
     {
         get
@@ -78,7 +78,7 @@ public static class XInput
             }
         }
     }
- 
+
     public static bool TryGetState(out XInputState state)
     {
         lock (LockObj)
@@ -88,7 +88,7 @@ public static class XInput
             {
                 return false;
             }
- 
+
             if (_cachedUserIndex.HasValue)
             {
                 var idx = (uint)_cachedUserIndex.Value;
@@ -96,10 +96,10 @@ public static class XInput
                 {
                     return true;
                 }
- 
+
                 _cachedUserIndex = null;
             }
- 
+
             for (var i = 0u; i < 4; i++)
             {
                 if (_getState(i, out state) == ErrorSuccess)
@@ -108,16 +108,16 @@ public static class XInput
                     return true;
                 }
             }
- 
+
             return false;
         }
     }
- 
+
     public static bool IsButtonDown(XInputState state, XInputButtons button)
     {
         return (state.Gamepad.wButtons & button) != 0;
     }
- 
+
     private static void TryLoadXInput()
     {
         lock (LockObj)
@@ -126,32 +126,32 @@ public static class XInput
             {
                 return;
             }
- 
+
             var candidates = new[]
             {
                 "xinput1_4.dll",
                 "xinput1_3.dll",
                 "xinput9_1_0.dll"
             };
- 
+
             foreach (var dll in candidates)
             {
                 if (!NativeLibrary.TryLoad(dll, out var handle))
                 {
                     continue;
                 }
- 
+
                 if (!NativeLibrary.TryGetExport(handle, "XInputGetState", out var export))
                 {
                     NativeLibrary.Free(handle);
                     continue;
                 }
- 
+
                 _libraryHandle = handle;
                 _getState = Marshal.GetDelegateForFunctionPointer<XInputGetStateDelegate>(export);
                 return;
             }
- 
+
             _libraryHandle = nint.Zero;
             _getState = null;
         }

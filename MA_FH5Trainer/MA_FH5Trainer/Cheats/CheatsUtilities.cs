@@ -24,9 +24,6 @@ public class CheatsUtilities
 
     protected static async Task<nuint> SmartAobScan(string search, UIntPtr? start = null, UIntPtr? end = null)
     {
-        //Imps.GetSystemInfo(out var info);
-
-        //var handle = GetInstance().MProc.Handle;
         var minRange = (long)GetInstance().MProc.Process.MainModule!.BaseAddress;
         var maxRange = minRange + GetInstance().MProc.Process.MainModule!.ModuleMemorySize;
 

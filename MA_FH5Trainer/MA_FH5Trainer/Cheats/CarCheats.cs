@@ -110,14 +110,14 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             0x0F, 0x6F, 0x04, 0x24, 0x48, 0x83, 0xC4, 0x30, 0x5B, 0xF3, 0x0F, 0x10, 0x4F, 0x24, 0x48, 0x89, 0x3D,
             0x23, 0x00, 0x00, 0x00
         };
-            
+
         LocalPlayerHookDetourAddress = GetInstance().CreateDetour(_localPlayerHookAddress, asm, 5);
         if (LocalPlayerHookDetourAddress == 0)
         {
             ShowError("CheatLocalPlayer", "LocalPlayerHookDetourAddress == 0");
             return false;
         }
-        
+
         return true;
     }
 
@@ -136,7 +136,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
         ShowError("Race Ptr", sig);
         return 0;
     }
-    
+
     public async Task<bool> CheatAccel()
     {
         _accelAddress = 0;
@@ -149,7 +149,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             ShowError("CheatAccel", "_accelAddress == 0");
             return false;
         }
-        
+
         if (LocalPlayerHookDetourAddress == 0)
         {
             await CheatLocalPlayer();
@@ -159,7 +159,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
         {
             return false;
         }
-            
+
         var localPlayerAddr = BitConverter.GetBytes(LocalPlayerHookDetourAddress + CarCheatsOffsets.LocalPlayer);
         var raceBytes = BitConverter.GetBytes(_racePtr);
         var asm = new byte[]
@@ -172,17 +172,17 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             0x19, 0xF3, 0x0F, 0x11, 0x1D, 0x1C, 0x00, 0x00, 0x00, 0x80, 0x3D, 0x10, 0x00, 0x00, 0x00, 0x01, 0x75,
             0x08, 0xF3, 0x0F, 0x59, 0x1D, 0x07, 0x00, 0x00, 0x00, 0x58
         };
-        
+
         AccelDetourAddress = GetInstance().CreateDetour(_accelAddress, asm, 5);
         if (AccelDetourAddress == 0)
         {
             ShowError("CheatAccel", "AccelDetourAddress == 0");
             return false;
         }
-        
+
         return true;
     }
-    
+
     public async Task CheatGravity()
     {
         _gravityAddress = 0;
@@ -201,7 +201,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             {
                 return;
             }
-            
+
             var localPlayerAddr = BitConverter.GetBytes(LocalPlayerHookDetourAddress + CarCheatsOffsets.LocalPlayer);
             var raceBytes = BitConverter.GetBytes(_racePtr);
             var asm = new byte[]
@@ -218,7 +218,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             GravityDetourAddress = GetInstance().CreateDetour(_gravityAddress, asm, 5);
             return;
         }
-        
+
         ShowError("Gravity", sig);
     }
 
@@ -249,11 +249,11 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
                 localPlayerAddr[4], localPlayerAddr[5], localPlayerAddr[6], localPlayerAddr[7], 0x48, 0x8B, 0x00, 0x48,
                 0x85, 0xC0, 0x74, 0x09, 0x0F, 0x11, 0x50, 0x50, 0x44, 0x0F, 0x11, 0x78, 0x20, 0x58
             };
-            
+
             WaypointDetourAddress = GetInstance().CreateDetour(_waypointAddress, asm, 7);
             return;
         }
-        
+
         ShowError("Waypoint", sig);
     }
 
@@ -271,7 +271,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             {
                 await CheatLocalPlayer();
             }
-            
+
             if (LocalPlayerHookDetourAddress == 0) return;
 
             var localPlayer = BitConverter.GetBytes(LocalPlayerHookDetourAddress + CarCheatsOffsets.LocalPlayer);
@@ -288,7 +288,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             FreezeAiDetourAddress = GetInstance().CreateDetour(_freezeAiAddress, asm, 8);
             return;
         }
-        
+
         ShowError("Freeze Ai", sig);
     }
 
@@ -317,11 +317,11 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
 
             NoWaterDragDetourAddress = GetInstance().CreateDetour(_noWaterDragAddress, asm, 8);
             return;
-        }    
-        
+        }
+
         ShowError("No water drag", sig);
     }
-    
+
     public async Task CheatNoClip()
     {
         _noClipAddress = 0;
@@ -336,9 +336,9 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             {
                 await CheatLocalPlayer();
             }
-            
+
             if (LocalPlayerHookDetourAddress == 0) return;
-            
+
             var localPlayer = BitConverter.GetBytes(LocalPlayerHookDetourAddress + CarCheatsOffsets.LocalPlayer);
             var asm = new byte[]
             {
@@ -351,14 +351,14 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             NoClipDetourAddress = GetInstance().CreateDetour(_noClipAddress, asm, 7);
             return;
         }
-        
+
         ShowError("No clip", sig);
     }
-    
+
     public void Cleanup()
     {
         var mem = GetInstance();
-        
+
         if (AccelDetourAddress > 0)
         {
             mem.WriteArrayMemory(_accelAddress, new byte[] { 0xF3, 0x0F, 0x10, 0x5D, 0x0C });
@@ -380,7 +380,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
         if (_freezeAiAddress > 0)
         {
             mem.WriteArrayMemory(_freezeAiAddress, new byte[] { 0xF3, 0x0F, 0x58, 0x81, 0x54, 0x01, 0x00, 0x00 });
-            Free(FreezeAiDetourAddress);            
+            Free(FreezeAiDetourAddress);
         }
 
         if (_noWaterDragAddress > 0)
@@ -394,7 +394,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             mem.WriteArrayMemory(_noClipAddress, new byte[] { 0x48, 0x8B, 0xC4, 0x4C, 0x89, 0x48, 0x20 });
             Free(NoClipDetourAddress);
         }
-        
+
         if (LocalPlayerHookDetourAddress <= 0) return;
         mem.WriteArrayMemory(_localPlayerHookAddress, new byte[] { 0xF3, 0x0F, 0x10, 0x4F, 0x24 });
         Free(LocalPlayerHookDetourAddress);
@@ -410,9 +410,9 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
     }
 
     public void Revert()
-    {        
+    {
         var mem = GetInstance();
-        
+
         if (AccelDetourAddress > 0)
         {
             mem.WriteArrayMemory(_accelAddress, new byte[] { 0xF3, 0x0F, 0x10, 0x5D, 0x0C });
@@ -442,7 +442,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
         {
             mem.WriteArrayMemory(_noClipAddress, new byte[] { 0x48, 0x8B, 0xC4, 0x4C, 0x89, 0x48, 0x20 });
         }
-        
+
         if (LocalPlayerHookDetourAddress <= 0) return;
         mem.WriteArrayMemory(_localPlayerHookAddress, new byte[] { 0xF3, 0x0F, 0x10, 0x4F, 0x24 });
     }
@@ -450,7 +450,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
     public void Continue()
     {
         var mem = GetInstance();
-        
+
         if (AccelDetourAddress > 0)
         {
             mem.WriteArrayMemory(_accelAddress, CalculateDetour(_accelAddress, AccelDetourAddress, 5));
@@ -480,7 +480,7 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
         {
             mem.WriteArrayMemory(_noClipAddress, CalculateDetour(_noClipAddress, NoClipDetourAddress, 7));
         }
-        
+
         if (LocalPlayerHookDetourAddress <= 0) return;
         mem.WriteArrayMemory(_localPlayerHookAddress, CalculateDetour(_localPlayerHookAddress, LocalPlayerHookDetourAddress, 5));
     }
