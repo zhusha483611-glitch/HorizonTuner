@@ -18,7 +18,7 @@
 - `MA_FH5Trainer/Memory/` — 内存库：`Methods/`（AoB/Read/Write）、`Types/`、`Utils.cs`
 - `MA_FH5Trainer/MA_FH5Trainer.Tests/` — xUnit 测试项目
 - `MA_FH5Trainer/openspec/` — OpenSpec 规范与变更
-- `docs/` — 技术文档（`.md`）+ 少量源码参考副本（**勿在此改源码**）
+- `docs/` — 活跃技术文档（`.md`）；`archive/docs/` — 已过时的过程性/修复类文档（不再主动引用）
 - `.trae/documents/` — 开发复盘文档（约 50 个，按主题命名）
 
 ## 构建 / 测试 / 运行
@@ -68,7 +68,6 @@ dotnet publish MA_FH5Trainer/MA_FH5Trainer/MA_FH5Trainer.csproj \
 - 仅 Windows x64、必须 .NET 8、发布须单文件；部分功能需管理员权限；`Mutex` 保证单实例。
 - 反作弊封禁风险，项目不担责。
 - 多段式“无效果”常见原因：开关未开、扳机阈值不匹配；诊断见 `Handling.Diagnostics.cs`。自动触发基于 RT 加速 / LT 刹车，阈值用于避免自动加减速。
-- `docs/` 下的 `.cs` 仅为参考副本，改源码请改项目内对应目录。
 - 改动后务必 `dotnet build` + `dotnet test` 通过。
 
 ## 敏感改动前先读
