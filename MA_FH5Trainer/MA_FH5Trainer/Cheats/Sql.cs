@@ -1,8 +1,8 @@
-﻿using MA_FH5Trainer.Resources;
+﻿using HorizonTuner.Resources;
 using Memory;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Cheats.ForzaHorizon5;
+namespace HorizonTuner.Cheats.ForzaHorizon5;
 
 public class Sql : CheatsUtilities, ICheatsBase
 {

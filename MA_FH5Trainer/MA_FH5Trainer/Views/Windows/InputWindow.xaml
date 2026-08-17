@@ -1,4 +1,4 @@
-<mah:MetroWindow x:Class="MA_FH5Trainer.Views.Windows.InputWindow"
+<mah:MetroWindow x:Class="HorizonTuner.Views.Windows.InputWindow"
                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
@@ -13,7 +13,7 @@
     <mah:MetroWindow.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/MA_FH5Trainer;component/Views/SubPages/SelfVehicle/HandlingResources.xaml"/>
+                <ResourceDictionary Source="/HorizonTuner;component/Views/SubPages/SelfVehicle/HandlingResources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </mah:MetroWindow.Resources>

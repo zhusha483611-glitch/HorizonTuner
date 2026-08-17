@@ -1,7 +1,7 @@
 using System.Windows;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Views.Windows;
 
-namespace MA_FH5Trainer.Services.Dialogs;
+namespace HorizonTuner.Services.Dialogs;
 
 public sealed class PresetManagerDialogService : IPresetManagerDialogService
 {

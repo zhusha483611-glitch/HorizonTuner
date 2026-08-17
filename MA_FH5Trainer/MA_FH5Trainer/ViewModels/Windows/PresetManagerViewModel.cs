@@ -8,11 +8,11 @@ using System.Windows.Data;
 using System.Windows.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MA_FH5Trainer.Models;
-using MA_FH5Trainer.Resources.Config;
-using MA_FH5Trainer.Services.Dialogs;
+using HorizonTuner.Models;
+using HorizonTuner.Resources.Config;
+using HorizonTuner.Services.Dialogs;
 
-namespace MA_FH5Trainer.ViewModels.Windows;
+namespace HorizonTuner.ViewModels.Windows;
 
 public enum PresetSortMode
 {

@@ -1,14 +1,14 @@
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using MA_FH5Trainer.Cheats;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Cheats;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.ViewModels.SubPages.SelfVehicle;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Misc
 {
@@ -23,8 +23,8 @@ public partial class Misc
 
     public MainWindow MainWindow { get; }
     public MiscViewModel ViewModel { get; }
-    private static MiscCheats MiscCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<MiscCheats>();
-    private static CarCheats CarCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<CarCheats>();
+    private static MiscCheats MiscCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<MiscCheats>();
+    private static CarCheats CarCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<CarCheats>();
     
     private async void NameSpooferSwitch_OnToggled(object sender, RoutedEventArgs e)
     {

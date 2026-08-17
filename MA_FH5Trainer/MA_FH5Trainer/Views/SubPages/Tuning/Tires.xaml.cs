@@ -1,11 +1,11 @@
 using System.Windows;
 using System.Windows.Controls;
-using MA_FH5Trainer.Cheats;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Views.Windows;
-using static MA_FH5Trainer.Resources.Memory;
+using HorizonTuner.Cheats;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Views.Windows;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.Tuning;
+namespace HorizonTuner.Views.SubPages.Tuning;
 
 public partial class Tires
 {
@@ -18,8 +18,8 @@ public partial class Tires
     }
     
     public MainWindow MainWindow { get; }
-    private static TuningCheats TuningCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<TuningCheats>();
-    private static CarCheats CarCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<CarCheats>();
+    private static TuningCheats TuningCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<TuningCheats>();
+    private static CarCheats CarCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<CarCheats>();
     private static UIntPtr Ptr => GetInstance()
         .ReadMemory<UIntPtr>(unchecked(CarCheatsFh5.LocalPlayerHookDetourAddress + CarCheatsOffsets.LocalPlayer));
     

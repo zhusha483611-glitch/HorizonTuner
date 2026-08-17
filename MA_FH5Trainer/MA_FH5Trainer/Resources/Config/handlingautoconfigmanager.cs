@@ -4,7 +4,7 @@ using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
  
-namespace MA_FH5Trainer.Resources.Config;
+namespace HorizonTuner.Resources.Config;
  
 public enum VelocityMode
 {
@@ -88,7 +88,7 @@ public sealed class HandlingAutoConfig
     public double VelocityAStage2TargetFrac { get; set; } = 0.98;
 
     // 用户自定义预设列表
-    public List<MA_FH5Trainer.Models.VelocityPreset> CustomVelocityPresets { get; set; } = new();
+    public List<HorizonTuner.Models.VelocityPreset> CustomVelocityPresets { get; set; } = new();
 
     public bool VelocityChaseLimitOn { get; set; }
     public double VelocityChaseKp { get; set; } = 1.2;

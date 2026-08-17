@@ -1,7 +1,7 @@
-using MA_FH5Trainer.Resources.Config;
-using MA_FH5Trainer.Services.Handling.Abstractions;
+using HorizonTuner.Resources.Config;
+using HorizonTuner.Services.Handling.Abstractions;
 
-namespace MA_FH5Trainer.Services.Handling.Implementations;
+namespace HorizonTuner.Services.Handling.Implementations;
 
 public sealed class DefaultHandlingAutoConfigStore : IHandlingAutoConfigStore
 {

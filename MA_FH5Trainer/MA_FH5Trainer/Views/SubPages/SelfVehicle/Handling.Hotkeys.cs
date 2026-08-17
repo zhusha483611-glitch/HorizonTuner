@@ -1,7 +1,7 @@
-using MA_FH5Trainer.Resources.Keybinds;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Resources.Keybinds;
+using HorizonTuner.Views.Windows;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {

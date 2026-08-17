@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Views.Windows;
 
-namespace MA_FH5Trainer.ViewModels.SubPages;
+namespace HorizonTuner.ViewModels.SubPages;
 
 public partial class MultipliersViewModel : ObservableObject
 {

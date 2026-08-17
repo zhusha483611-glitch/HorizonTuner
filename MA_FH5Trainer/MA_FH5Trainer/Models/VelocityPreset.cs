@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace MA_FH5Trainer.Models;
+namespace HorizonTuner.Models;
 
 /// <summary>
 /// 多段式速度加速预设

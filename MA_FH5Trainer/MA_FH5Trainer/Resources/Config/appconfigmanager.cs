@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
  
-namespace MA_FH5Trainer.Resources.Config;
+namespace HorizonTuner.Resources.Config;
  
 public sealed class AppConfig
 {

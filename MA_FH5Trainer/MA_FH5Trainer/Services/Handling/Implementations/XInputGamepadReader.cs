@@ -1,7 +1,7 @@
-using MA_FH5Trainer.Resources.Input;
-using MA_FH5Trainer.Services.Handling.Abstractions;
+using HorizonTuner.Resources.Input;
+using HorizonTuner.Services.Handling.Abstractions;
 
-namespace MA_FH5Trainer.Services.Handling.Implementations;
+namespace HorizonTuner.Services.Handling.Implementations;
 
 public sealed class XInputGamepadReader : IGamepadReader
 {

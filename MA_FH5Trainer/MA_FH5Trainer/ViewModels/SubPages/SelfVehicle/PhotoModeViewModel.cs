@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
+namespace HorizonTuner.ViewModels.SubPages.SelfVehicle;
 
 public partial class PhotoModeViewModel : ObservableObject
 {

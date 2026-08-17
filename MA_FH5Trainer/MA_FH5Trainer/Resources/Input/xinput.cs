@@ -1,7 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace MA_FH5Trainer.Resources.Input;
+namespace HorizonTuner.Resources.Input;
 
 [Flags]
 public enum XInputButtons : ushort

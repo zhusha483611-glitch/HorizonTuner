@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using MA_FH5Trainer.Models;
+using HorizonTuner.Models;
 
-namespace MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
+namespace HorizonTuner.ViewModels.SubPages.SelfVehicle;
 
 public partial class CustomizationViewModel : ObservableObject
 {

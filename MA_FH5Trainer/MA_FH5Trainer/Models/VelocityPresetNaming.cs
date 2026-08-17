@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MA_FH5Trainer.Models;
+namespace HorizonTuner.Models;
 
 internal static class VelocityPresetNaming
 {

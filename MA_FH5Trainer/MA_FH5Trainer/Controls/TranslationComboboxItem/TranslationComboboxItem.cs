@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace MA_FH5Trainer.Controls.TranslationComboboxItem;
+namespace HorizonTuner.Controls.TranslationComboboxItem;
 
 public class TranslationComboboxItem : ComboBoxItem
 {
@@ -13,7 +13,7 @@ public class TranslationComboboxItem : ComboBoxItem
             new PropertyMetadata(default(string)));
     
     [Bindable(true)]
-    [Category("MA_FH5Trainer")]
+    [Category("HorizonTuner")]
     public string Translators
     {
         get => (string)GetValue(TranslatorsProperty);

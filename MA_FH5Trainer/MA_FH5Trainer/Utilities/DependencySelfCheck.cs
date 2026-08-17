@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using Reloaded.Memory.Sigscan;
 
-namespace MA_FH5Trainer.Utilities;
+namespace HorizonTuner.Utilities;
 
 public static class DependencySelfCheck
 {
@@ -52,7 +52,7 @@ public static class DependencySelfCheck
 
         // 检测是否为单文件发布模式
         var isSingleFile = AppContext.GetData("APP_CONTEXT_BASE_DIRECTORY") != null ||
-                          !File.Exists(Path.Combine(baseDir, "MA_FH5Trainer.dll"));
+                          !File.Exists(Path.Combine(baseDir, "HorizonTuner.dll"));
         if (!isSingleFile)
         {
             var memoryDll = Path.Combine(baseDir, "Memory.dll");
@@ -80,7 +80,7 @@ public static class DependencySelfCheck
             $"ToolVersion: {version}\n\n" +
             "建议：删除旧目录后从 Release 完整包重新解压；或检查杀软隔离记录并将工具目录加入白名单。";
 
-        MessageBox.Show(text, "MA_FH5Trainer - 依赖自检", MessageBoxButton.OK,
+        MessageBox.Show(text, "HorizonTuner - 依赖自检", MessageBoxButton.OK,
             critical ? MessageBoxImage.Error : MessageBoxImage.Warning);
 
         return !critical;

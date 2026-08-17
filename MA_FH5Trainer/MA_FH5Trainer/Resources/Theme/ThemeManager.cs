@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Windows.Threading;
 using System.Windows.Media.Animation;
 
-namespace MA_FH5Trainer.Resources.Theme;
+namespace HorizonTuner.Resources.Theme;
 
 public enum AppTheme
 {

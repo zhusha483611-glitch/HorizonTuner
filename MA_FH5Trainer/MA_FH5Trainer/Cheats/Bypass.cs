@@ -1,6 +1,6 @@
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Cheats.ForzaHorizon5;
+namespace HorizonTuner.Cheats.ForzaHorizon5;
 
 public class Bypass : CheatsUtilities, ICheatsBase
 {

@@ -1,4 +1,4 @@
-﻿namespace MA_FH5Trainer.Cheats;
+﻿namespace HorizonTuner.Cheats;
 
 public interface ICheatsBase
 {

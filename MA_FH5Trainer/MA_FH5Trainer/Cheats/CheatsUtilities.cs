@@ -1,11 +1,11 @@
 using System.Windows;
 using System.Collections.Concurrent;
-using MA_FH5Trainer.Models;
+using HorizonTuner.Models;
 using MahApps.Metro.Controls;
 using Memory;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Cheats;
+namespace HorizonTuner.Cheats;
 
 public class CheatsUtilities
 {
@@ -55,7 +55,7 @@ public class CheatsUtilities
 
         MessageBox.Show(
             $"Address for this feature wasn't found!\nPlease try to activate the cheat again or try to restart the game and the tool.\n\nIf this error still occurs, please (Press Ctrl+C) to copy, and make an issue on the GitHub repository or post the copied text in the in our discord server (discord.gg/rHzev9brJ3).\n\nFeature: {feature}\nSignature: {sig}{diagText}\n\nTool Version: {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}\nGame: {GameVerPlat.GetInstance().Name}\nGame Version: {GameVerPlat.GetInstance().Update}\nPlatform: {GameVerPlat.GetInstance().Platform}",
-            $"MA_FH5Trainer - Error", 0, MessageBoxImage.Error);
+            $"HorizonTuner - Error", 0, MessageBoxImage.Error);
     }
 
     protected static void Free(UIntPtr address)

@@ -1,7 +1,7 @@
 using System.Collections.Concurrent;
 using System.Runtime.InteropServices;
 
-namespace MA_FH5Trainer.Cheats;
+namespace HorizonTuner.Cheats;
 
 /// <summary>
 /// 内存池管理器，用于优化 AoB 扫描的内存分配

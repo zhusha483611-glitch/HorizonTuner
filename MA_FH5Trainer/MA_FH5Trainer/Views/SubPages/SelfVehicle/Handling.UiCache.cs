@@ -1,6 +1,6 @@
-using MA_FH5Trainer.Services.Handling.Curves;
+using HorizonTuner.Services.Handling.Curves;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {

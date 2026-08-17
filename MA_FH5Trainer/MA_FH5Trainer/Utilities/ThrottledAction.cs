@@ -1,6 +1,6 @@
 using System.Windows.Threading;
 
-namespace MA_FH5Trainer.Utilities;
+namespace HorizonTuner.Utilities;
 
 public class ThrottledAction
 {

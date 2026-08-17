@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace MA_FH5Trainer.Converters;
+namespace HorizonTuner.Converters;
 
 public class BoolParamConverter : IMultiValueConverter
 {

@@ -1,7 +1,7 @@
-using MA_FH5Trainer.Services.Handling.Abstractions;
-using static MA_FH5Trainer.Resources.Memory;
+using HorizonTuner.Services.Handling.Abstractions;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Services.Handling.Implementations;
+namespace HorizonTuner.Services.Handling.Implementations;
 
 public sealed class DefaultMemoryWriter : IMemoryWriter
 {

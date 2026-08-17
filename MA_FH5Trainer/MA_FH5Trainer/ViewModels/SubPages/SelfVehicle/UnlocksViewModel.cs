@@ -1,9 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using static MA_FH5Trainer.Resources.Cheats;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using static HorizonTuner.Resources.Cheats;
 
-namespace MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
+namespace HorizonTuner.ViewModels.SubPages.SelfVehicle;
 
 public partial class UnlocksViewModel : ObservableObject
 {

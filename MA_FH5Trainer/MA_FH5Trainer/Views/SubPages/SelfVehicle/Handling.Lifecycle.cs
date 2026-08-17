@@ -1,9 +1,9 @@
 using System.ComponentModel;
 using System.Windows;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Services;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Services;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {
@@ -109,10 +109,10 @@ public partial class Handling
         {
             velocityMaxKmh.Value = config.VelocityMode switch
             {
-                MA_FH5Trainer.Resources.Config.VelocityMode.S1Car => config.VelocityS1MaxKmh,
-                MA_FH5Trainer.Resources.Config.VelocityMode.S2Car => config.VelocityS2MaxKmh,
-                MA_FH5Trainer.Resources.Config.VelocityMode.ACar => config.VelocityAMaxKmh,
-                MA_FH5Trainer.Resources.Config.VelocityMode.Custom => config.VelocityCustomMaxKmh,
+                HorizonTuner.Resources.Config.VelocityMode.S1Car => config.VelocityS1MaxKmh,
+                HorizonTuner.Resources.Config.VelocityMode.S2Car => config.VelocityS2MaxKmh,
+                HorizonTuner.Resources.Config.VelocityMode.ACar => config.VelocityAMaxKmh,
+                HorizonTuner.Resources.Config.VelocityMode.Custom => config.VelocityCustomMaxKmh,
                 _ => config.VelocityS2MaxKmh
             };
         }
@@ -124,25 +124,25 @@ public partial class Handling
 
         switch (config.VelocityMode)
         {
-            case MA_FH5Trainer.Resources.Config.VelocityMode.S1Car:
+            case HorizonTuner.Resources.Config.VelocityMode.S1Car:
                 _velocityStage1End = config.VelocityS1Stage1End;
                 _velocityStage2End = config.VelocityS1Stage2End;
                 _velocityStage1TargetFrac = config.VelocityS1Stage1TargetFrac;
                 _velocityStage2TargetFrac = config.VelocityS1Stage2TargetFrac;
                 break;
-            case MA_FH5Trainer.Resources.Config.VelocityMode.S2Car:
+            case HorizonTuner.Resources.Config.VelocityMode.S2Car:
                 _velocityStage1End = config.VelocityS2Stage1End;
                 _velocityStage2End = config.VelocityS2Stage2End;
                 _velocityStage1TargetFrac = config.VelocityS2Stage1TargetFrac;
                 _velocityStage2TargetFrac = config.VelocityS2Stage2TargetFrac;
                 break;
-            case MA_FH5Trainer.Resources.Config.VelocityMode.ACar:
+            case HorizonTuner.Resources.Config.VelocityMode.ACar:
                 _velocityStage1End = config.VelocityAStage1End;
                 _velocityStage2End = config.VelocityAStage2End;
                 _velocityStage1TargetFrac = config.VelocityAStage1TargetFrac;
                 _velocityStage2TargetFrac = config.VelocityAStage2TargetFrac;
                 break;
-            case MA_FH5Trainer.Resources.Config.VelocityMode.Custom:
+            case HorizonTuner.Resources.Config.VelocityMode.Custom:
                 _velocityStage1Gamma = config.VelocityStage1Gamma;
                 _velocityStage2Gamma = config.VelocityStage2Gamma;
                 _velocityStage3Gamma = config.VelocityStage3Gamma;

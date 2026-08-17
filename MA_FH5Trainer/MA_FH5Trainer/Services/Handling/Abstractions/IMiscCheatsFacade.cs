@@ -1,4 +1,4 @@
-namespace MA_FH5Trainer.Services.Handling.Abstractions;
+namespace HorizonTuner.Services.Handling.Abstractions;
 
 public interface IMiscCheatsFacade
 {

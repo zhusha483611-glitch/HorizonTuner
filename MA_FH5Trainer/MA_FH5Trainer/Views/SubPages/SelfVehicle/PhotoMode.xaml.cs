@@ -1,14 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Models;
-using MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Models;
+using HorizonTuner.ViewModels.SubPages.SelfVehicle;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
-using static MA_FH5Trainer.Resources.Cheats;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Cheats;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class PhotoMode
 {

@@ -1,4 +1,4 @@
-namespace MA_FH5Trainer.Services.Handling.Curves;
+namespace HorizonTuner.Services.Handling.Curves;
 
 public static class TriggerMath
 {

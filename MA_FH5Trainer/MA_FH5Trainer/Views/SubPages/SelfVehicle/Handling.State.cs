@@ -1,11 +1,11 @@
 using System.Windows.Input;
 using System.Windows.Threading;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Resources.Config;
-using MA_FH5Trainer.Resources.Keybinds;
-using MA_FH5Trainer.Services;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Resources.Config;
+using HorizonTuner.Resources.Keybinds;
+using HorizonTuner.Services;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {

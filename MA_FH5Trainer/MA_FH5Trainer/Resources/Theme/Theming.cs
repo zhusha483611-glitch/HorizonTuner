@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Media;
 
-namespace MA_FH5Trainer.Resources.Theme;
+namespace HorizonTuner.Resources.Theme;
 
 /// <summary>
 /// Provides typed access to theme resources for ViewModel binding.

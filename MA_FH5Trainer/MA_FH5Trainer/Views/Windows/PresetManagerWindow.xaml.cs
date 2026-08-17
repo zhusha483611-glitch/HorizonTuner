@@ -2,10 +2,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using MahApps.Metro.Controls;
-using MA_FH5Trainer.Services.Dialogs;
-using MA_FH5Trainer.ViewModels.Windows;
+using HorizonTuner.Services.Dialogs;
+using HorizonTuner.ViewModels.Windows;
 
-namespace MA_FH5Trainer.Views.Windows;
+namespace HorizonTuner.Views.Windows;
 
 /// <summary>
 /// 预设管理窗口

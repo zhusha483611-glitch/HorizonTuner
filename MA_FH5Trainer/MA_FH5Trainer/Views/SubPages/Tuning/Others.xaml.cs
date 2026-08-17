@@ -1,10 +1,10 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Views.Windows;
-using static MA_FH5Trainer.Resources.Memory;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Views.Windows;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.Tuning;
+namespace HorizonTuner.Views.SubPages.Tuning;
 
 public partial class Others
 {
@@ -17,7 +17,7 @@ public partial class Others
     }
     
     public MainWindow MainWindow { get; }
-    private static TuningCheats TuningCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<TuningCheats>();
+    private static TuningCheats TuningCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<TuningCheats>();
     private static readonly int[] Offsets1 = [0x330, 0x8, 0x1E0, 0x0];
     private static UIntPtr Ptr1 => GetInstance().FollowMultiLevelPointer(TuningCheatsFh5.Base2, Offsets1);
     private static readonly int[] Offsets2 = [0x150, 0x300, 0x0];

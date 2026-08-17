@@ -1,4 +1,4 @@
-namespace MA_FH5Trainer.Services.Dialogs;
+namespace HorizonTuner.Services.Dialogs;
 
 public interface IPresetManagerDialogService
 {

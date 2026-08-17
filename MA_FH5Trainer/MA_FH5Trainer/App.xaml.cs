@@ -1,19 +1,19 @@
 using System.Windows;
-using MA_FH5Trainer.Cheats;
-using MA_FH5Trainer.Models;
-using MA_FH5Trainer.Resources;
-using MA_FH5Trainer.Resources.Keybinds;
-using MA_FH5Trainer.Services;
-using MA_FH5Trainer.Utilities;
-using MA_FH5Trainer.ViewModels.Windows;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Cheats;
+using HorizonTuner.Models;
+using HorizonTuner.Resources;
+using HorizonTuner.Resources.Keybinds;
+using HorizonTuner.Services;
+using HorizonTuner.Utilities;
+using HorizonTuner.ViewModels.Windows;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using static MA_FH5Trainer.Resources.Cheats;
+using static HorizonTuner.Resources.Cheats;
 
-namespace MA_FH5Trainer;
+namespace HorizonTuner;
 
 public partial class App
 {
@@ -44,7 +44,7 @@ public partial class App
             return;
         }
 
-        MA_FH5Trainer.Resources.Theme.AppThemeManager.Initialize();
+        HorizonTuner.Resources.Theme.AppThemeManager.Initialize();
         await Host.StartAsync();
         //HotkeysManager.SetupSystemHook();
     }
@@ -99,7 +99,7 @@ public partial class App
     {
         MessageBox.Show(
             $"An unexpected error happened.\nThe application will terminate after you press \"OK\".\n\n\nPlease (Press Ctrl+C) to copy, and make an issue on the github repository or post the copied text in our discord server (discord.gg/rHzev9brJ3)\n\nSource:{source}\nException:{exception.Message}\nException Callstack:{exception.StackTrace}\n\nTool Version: {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}\nGame: {GameVerPlat.GetInstance().Name}\nGame Version: {GameVerPlat.GetInstance().Update}\nPlatform: {GameVerPlat.GetInstance().Platform}",
-            "MA_FH5Trainer - Error",
+            "HorizonTuner - Error",
             0,
             MessageBoxImage.Error
         );
@@ -130,6 +130,6 @@ public partial class App
         {
             ((ICheatsBase)cheatInstance.Value).Cleanup();
         }
-        _ = Imports.CloseHandle(MA_FH5Trainer.Resources.Memory.GetInstance().MProc.Handle);
+        _ = Imports.CloseHandle(HorizonTuner.Resources.Memory.GetInstance().MProc.Handle);
     }
 }

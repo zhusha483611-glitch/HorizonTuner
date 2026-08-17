@@ -1,10 +1,10 @@
 ﻿using System.Windows.Controls;
-using MA_FH5Trainer.Converters;
-using MA_FH5Trainer.Resources.Theme;
-using MA_FH5Trainer.ViewModels.Windows;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Converters;
+using HorizonTuner.Resources.Theme;
+using HorizonTuner.ViewModels.Windows;
+using HorizonTuner.Views.Windows;
 
-namespace MA_FH5Trainer.Views;
+namespace HorizonTuner.Views;
 
 public partial class ExpandersView : Page
 {

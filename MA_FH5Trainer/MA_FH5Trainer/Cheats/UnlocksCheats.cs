@@ -1,10 +1,10 @@
 ﻿using System.Windows.Input.Manipulations;
-using MA_FH5Trainer.Resources;
+using HorizonTuner.Resources;
 using Memory;
-using static MA_FH5Trainer.Resources.Cheats;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Cheats;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Cheats.ForzaHorizon5;
+namespace HorizonTuner.Cheats.ForzaHorizon5;
 
 public class UnlocksCheats : CheatsUtilities, ICheatsBase, IRevertBase
 {

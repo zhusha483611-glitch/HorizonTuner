@@ -1,7 +1,7 @@
 using System.Windows;
 using MahApps.Metro.Controls;
 
-namespace MA_FH5Trainer.Views.Windows;
+namespace HorizonTuner.Views.Windows;
 
 /// <summary>
 /// 输入对话框窗口

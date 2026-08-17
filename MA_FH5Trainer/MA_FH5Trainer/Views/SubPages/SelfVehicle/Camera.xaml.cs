@@ -1,14 +1,14 @@
 ﻿using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Models;
-using MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Models;
+using HorizonTuner.ViewModels.SubPages.SelfVehicle;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Camera
 {
@@ -23,7 +23,7 @@ public partial class Camera
     
     public MainWindow MainWindow { get; }
     public CameraViewModel ViewModel { get; }
-    private static CameraCheats CameraCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<CameraCheats>();
+    private static CameraCheats CameraCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<CameraCheats>();
 
     private async void LimitersScanButton_OnClick(object sender, RoutedEventArgs e)
     {

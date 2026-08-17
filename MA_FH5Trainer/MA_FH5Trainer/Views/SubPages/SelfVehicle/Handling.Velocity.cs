@@ -1,16 +1,16 @@
 using System.Windows;
 using System.Windows.Controls;
-using MA_FH5Trainer.Cheats;
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Resources.Config;
-using MA_FH5Trainer.Services;
-using MA_FH5Trainer.Services.Handling.Curves;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Cheats;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Resources.Config;
+using HorizonTuner.Services;
+using HorizonTuner.Services.Handling.Curves;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
-using static MA_FH5Trainer.Resources.Cheats;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Cheats;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {

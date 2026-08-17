@@ -4,7 +4,7 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MahApps.Metro.Controls;
 
-namespace MA_FH5Trainer.Resources.Keybinds;
+namespace HorizonTuner.Resources.Keybinds;
 
 // https://github.com/AngryCarrot789/KeyDownTester/blob/master/KeyDownTester/Keys/GlobalHotkey.cs
 public partial class GlobalHotkey : ObservableObject

@@ -1,4 +1,4 @@
-namespace MA_FH5Trainer.Models;
+namespace HorizonTuner.Models;
 
 public sealed record VelocityPresetEdit(
     double Stage1Gamma,

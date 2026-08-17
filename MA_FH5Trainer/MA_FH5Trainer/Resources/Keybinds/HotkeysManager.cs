@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
-namespace MA_FH5Trainer.Resources.Keybinds;
+namespace HorizonTuner.Resources.Keybinds;
 
 public static partial class HotkeysManager
 {
@@ -48,7 +48,7 @@ public static partial class HotkeysManager
         if (s_hookRetryCount >= MAX_HOOK_RETRIES)
         {
             MessageBox.Show($"Failed to setup hotkeys after {MAX_HOOK_RETRIES} attempts. Hotkeys will not work!\n\nLast error: {GetLastWin32ErrorMessage()}",
-                "MA_FH5Trainer - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                "HorizonTuner - Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
 
@@ -94,7 +94,7 @@ public static partial class HotkeysManager
             }
                 
             MessageBox.Show($"Exception setting up hotkeys: {ex.Message}",
-                "MA_FH5Trainer - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                "HorizonTuner - Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
     }

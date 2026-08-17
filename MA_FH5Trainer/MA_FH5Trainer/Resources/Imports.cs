@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace MA_FH5Trainer.Resources;
+namespace HorizonTuner.Resources;
 
 public static partial class Imports
 {

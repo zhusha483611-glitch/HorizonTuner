@@ -1,8 +1,8 @@
 using System.Windows.Data;
 using System.Globalization;
-using MA_FH5Trainer.Resources;
+using HorizonTuner.Resources;
 
-namespace MA_FH5Trainer.Converters;
+namespace HorizonTuner.Converters;
 
 public class TypeToInstanceConverter : IValueConverter
 {

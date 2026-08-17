@@ -1,4 +1,4 @@
-namespace MA_FH5Trainer.Converters;
+namespace HorizonTuner.Converters;
 
 using System;
 using System.Globalization;

@@ -1,4 +1,4 @@
-﻿namespace MA_FH5Trainer.Models;
+﻿namespace HorizonTuner.Models;
 
 public class GameVerPlat(string name, string platform, string update,GameVerPlat.GameType type)
 {

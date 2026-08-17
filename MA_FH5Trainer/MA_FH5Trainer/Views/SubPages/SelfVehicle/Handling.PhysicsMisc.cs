@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using MahApps.Metro.Controls;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {

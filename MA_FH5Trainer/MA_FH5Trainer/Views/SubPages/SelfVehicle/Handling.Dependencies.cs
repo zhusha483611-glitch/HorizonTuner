@@ -1,6 +1,6 @@
-using MA_FH5Trainer.Services.Handling.Abstractions;
+using HorizonTuner.Services.Handling.Abstractions;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Handling
 {

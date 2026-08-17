@@ -1,7 +1,7 @@
 using System;
-using MA_FH5Trainer.Models;
+using HorizonTuner.Models;
 
-namespace MA_FH5Trainer.Resources.Config;
+namespace HorizonTuner.Resources.Config;
 
 public static class HandlingAutoConfigMigration
 {

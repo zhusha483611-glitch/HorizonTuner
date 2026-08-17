@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace MA_FH5Trainer.Services;
+namespace HorizonTuner.Services;
 
 public static class ShutdownCoordinator
 {

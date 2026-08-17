@@ -1,8 +1,8 @@
-using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Services.Handling.Abstractions;
-using static MA_FH5Trainer.Resources.Cheats;
+using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Services.Handling.Abstractions;
+using static HorizonTuner.Resources.Cheats;
 
-namespace MA_FH5Trainer.Services.Handling.Implementations;
+namespace HorizonTuner.Services.Handling.Implementations;
 
 public sealed class DefaultMiscCheatsFacade : IMiscCheatsFacade
 {

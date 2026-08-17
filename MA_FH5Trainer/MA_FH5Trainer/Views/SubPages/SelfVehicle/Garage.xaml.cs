@@ -1,10 +1,10 @@
 ﻿using System.Windows.Controls;
-using MA_FH5Trainer.Resources.Theme;
-using MA_FH5Trainer.ViewModels.Pages;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Resources.Theme;
+using HorizonTuner.ViewModels.Pages;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle;
+namespace HorizonTuner.Views.SubPages.SelfVehicle;
 
 public partial class Garage : Page
 {

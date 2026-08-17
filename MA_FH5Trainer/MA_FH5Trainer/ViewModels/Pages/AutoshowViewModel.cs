@@ -1,10 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MA_FH5Trainer.Models;
-using MA_FH5Trainer.Views.Windows;
-using static MA_FH5Trainer.Resources.Cheats;
+using HorizonTuner.Models;
+using HorizonTuner.Views.Windows;
+using static HorizonTuner.Resources.Cheats;
 
-namespace MA_FH5Trainer.ViewModels.Pages;
+namespace HorizonTuner.ViewModels.Pages;
 
 public partial class AutoshowViewModel : ObservableObject
 {

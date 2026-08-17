@@ -1,5 +1,5 @@
-﻿using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.Views.Windows;
+﻿using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -15,9 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle
+namespace HorizonTuner.Views.SubPages.SelfVehicle
 {
     /// <summary>
     /// Interaction logic for TimerFreezes.xaml
@@ -29,7 +29,7 @@ namespace MA_FH5Trainer.Views.SubPages.SelfVehicle
             InitializeComponent();
         }
 
-        public MiscCheats MiscCheats = MA_FH5Trainer.Resources.Cheats.GetClass<MiscCheats>();
+        public MiscCheats MiscCheats = HorizonTuner.Resources.Cheats.GetClass<MiscCheats>();
 
         private async void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {

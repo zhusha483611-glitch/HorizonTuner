@@ -1,10 +1,10 @@
 using System.Windows;
-using MA_FH5Trainer.Resources.Theme;
-using MA_FH5Trainer.Views.Windows;
+using HorizonTuner.Resources.Theme;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
 using Microsoft.Extensions.Hosting;
 
-namespace MA_FH5Trainer.Services;
+namespace HorizonTuner.Services;
 
 public class ApplicationHostService(IServiceProvider serviceProvider) : IHostedService
 {

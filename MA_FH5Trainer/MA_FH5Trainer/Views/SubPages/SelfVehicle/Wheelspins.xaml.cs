@@ -1,6 +1,6 @@
-﻿using MA_FH5Trainer.Cheats.ForzaHorizon5;
-using MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
-using MA_FH5Trainer.Views.Windows;
+﻿using HorizonTuner.Cheats.ForzaHorizon5;
+using HorizonTuner.ViewModels.SubPages.SelfVehicle;
+using HorizonTuner.Views.Windows;
 using MahApps.Metro.Controls;
 using System;
 using System.Collections.Generic;
@@ -16,9 +16,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Memory;
 
-namespace MA_FH5Trainer.Views.SubPages.SelfVehicle
+namespace HorizonTuner.Views.SubPages.SelfVehicle
 {
     /// <summary>
     /// Interaction logic for Wheelspins.xaml
@@ -36,8 +36,8 @@ namespace MA_FH5Trainer.Views.SubPages.SelfVehicle
         public MainWindow MainWindow { get; }
         public WheelspinsViewModel ViewModel { get; }
 
-        public MiscCheats MiscCheats = MA_FH5Trainer.Resources.Cheats.GetClass<MiscCheats>();
-        public UnlocksCheats UnlocksCheatsFh5 => MA_FH5Trainer.Resources.Cheats.GetClass<UnlocksCheats>();
+        public MiscCheats MiscCheats = HorizonTuner.Resources.Cheats.GetClass<MiscCheats>();
+        public UnlocksCheats UnlocksCheatsFh5 => HorizonTuner.Resources.Cheats.GetClass<UnlocksCheats>();
 
         private async void EmoteSwitch_OnToggled(object sender, RoutedEventArgs e)
         {

@@ -11,24 +11,24 @@ using System.Windows.Input;
 using System.Xml.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using MA_FH5Trainer.Cheats;
-using MA_FH5Trainer.Models;
-using MA_FH5Trainer.Resources.Keybinds;
-using MA_FH5Trainer.Resources.Theme;
+using HorizonTuner.Cheats;
+using HorizonTuner.Models;
+using HorizonTuner.Resources.Keybinds;
+using HorizonTuner.Resources.Theme;
 using Memory;
 using System.Windows.Media;
 using static System.Diagnostics.FileVersionInfo;
 using static System.IO.Path;
-using static MA_FH5Trainer.Resources.Cheats;
-using static MA_FH5Trainer.Resources.Memory;
+using static HorizonTuner.Resources.Cheats;
+using static HorizonTuner.Resources.Memory;
 using Timer = System.Timers.Timer;
-using MA_FH5Trainer.ViewModels.Pages;
-using MA_FH5Trainer.ViewModels.SubPages.SelfVehicle;
-using MA_FH5Trainer.Views;
+using HorizonTuner.ViewModels.Pages;
+using HorizonTuner.ViewModels.SubPages.SelfVehicle;
+using HorizonTuner.Views;
 using MahApps.Metro.Controls;
 using Environment = System.Environment;
 
-namespace MA_FH5Trainer.ViewModels.Windows;
+namespace HorizonTuner.ViewModels.Windows;
 
 public partial class MainWindowViewModel : ObservableObject
 {
@@ -394,7 +394,7 @@ public partial class MainWindowViewModel : ObservableObject
             var handle = GetInstance().MProc.Handle;
             if (handle != IntPtr.Zero && handle != new IntPtr(-1))
             {
-                _ = MA_FH5Trainer.Resources.Imports.CloseHandle(handle);
+                _ = HorizonTuner.Resources.Imports.CloseHandle(handle);
             }
         }
         catch

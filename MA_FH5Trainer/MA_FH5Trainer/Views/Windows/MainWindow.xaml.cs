@@ -5,13 +5,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
-using MA_FH5Trainer.Resources.Config;
-using MA_FH5Trainer.Resources.Keybinds;
-using MA_FH5Trainer.Resources.Theme;
-using MA_FH5Trainer.Services;
-using MA_FH5Trainer.ViewModels.Windows;
+using HorizonTuner.Resources.Config;
+using HorizonTuner.Resources.Keybinds;
+using HorizonTuner.Resources.Theme;
+using HorizonTuner.Services;
+using HorizonTuner.ViewModels.Windows;
 
-namespace MA_FH5Trainer.Views.Windows;
+namespace HorizonTuner.Views.Windows;
 
 public partial class MainWindow
 {
