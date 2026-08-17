@@ -19,7 +19,7 @@
 - `MA_FH5Trainer/MA_FH5Trainer.Tests/` — xUnit 测试项目
 - `MA_FH5Trainer/openspec/` — OpenSpec 规范与变更
 - `docs/` — 活跃技术文档（`.md`）；`archive/docs/` — 已过时的过程性/修复类文档（不再主动引用）
-- `.trae/documents/` — 开发复盘文档（约 50 个，按主题命名）
+- `.trae/documents/` — 开发复盘文档（57 个，**按主题链分组，先看 `README.md` 索引**；已过时提案归档于 `archive/trae/`）
 
 ## 构建 / 测试 / 运行
 ```bash
