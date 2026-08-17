@@ -97,12 +97,11 @@ MA_FH5Trainer_CN 是 Forza Horizon 5 的开源游戏修改器（作弊工具）�
 
 ### Testing Strategy
 
-当前项目未配置自动化测试。如需添加测试，应遵循以下原则：
-- 使用 xUnit 或 NUnit 作为测试框架
-- 测试项目应命名为 `*.Tests.csproj`
-- 单元测试应覆盖核心业务逻辑
-- 集成测试应验证内存操作的正确性
-- 测试覆盖率应不低于 70%
+测试项目已移除（曾为 `MA_FH5Trainer.Tests`，xUnit，覆盖转换器/配置迁移/预设/节流动作），待重建。重建原则：
+- 使用 xUnit 作为测试框架
+- 测试项目命名 `*.Tests.csproj`
+- 单元测试覆盖核心业务逻辑（配置迁移、预设规范化、节流、转换器）
+- 集成测试验证内存操作正确性（需 Windows 环境）
 
 ### Git Workflow
 
