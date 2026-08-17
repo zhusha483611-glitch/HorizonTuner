@@ -52,8 +52,8 @@
     <system:String x:Key="FH5EmoteIDs">FH5 表情ID</system:String>
     <system:String x:Key="GlowingPaintInstructions">发光车漆说明</system:String>
     <system:String x:Key="MerikasGitHub">Merika的GitHub</system:String>
-    <system:String x:Key="CheatFreeNotice">此修改器100%免费。如果你付费购买，你被骗了。由"Merika的服务器"Discord发布。</system:String>
-    <system:String x:Key="DeveloperNotice">由Discord上的 @merikaaaaa 开发。声称是开发者的其他人都在撒谎。</system:String>
+    <system:String x:Key="CheatFreeNotice">本修改器 100% 免费。如果你花钱购买，说明你被骗了。官方发布渠道：</system:String>
+    <system:String x:Key="DeveloperNotice">。开发者是 Discord 上的 @merikaaaaa，任何其他自称开发者的人都在撒谎。</system:String>
     
     <!-- ExpandersView.xaml - Expanders -->
     <system:String x:Key="AutoshowExpander">车展</system:String>

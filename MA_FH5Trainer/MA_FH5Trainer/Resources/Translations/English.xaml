@@ -52,8 +52,8 @@
     <system:String x:Key="FH5EmoteIDs">FH5 Emote ID's</system:String>
     <system:String x:Key="GlowingPaintInstructions">Glowing Paint Instructions</system:String>
     <system:String x:Key="MerikasGitHub">Merika's GitHub</system:String>
-    <system:String x:Key="CheatFreeNotice">This cheat is 100% free. If you paid, you were scammed. Published by the "Merika's Server" Discord.</system:String>
-    <system:String x:Key="DeveloperNotice">Developed by @merikaaaaa on Discord. Others claiming credit are lying.</system:String>
+    <system:String x:Key="CheatFreeNotice">This trainer is 100% free. If you paid money for it, you've been scammed. Official release channel: </system:String>
+    <system:String x:Key="DeveloperNotice">. Developed by @merikaaaaa on Discord. Anyone else claiming to be the developer is lying.</system:String>
     
     <!-- ExpandersView.xaml - Expanders -->
     <system:String x:Key="AutoshowExpander">Autoshow</system:String>

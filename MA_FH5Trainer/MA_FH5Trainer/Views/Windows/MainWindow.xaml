@@ -111,13 +111,11 @@
                            FontWeight="Medium"
                            FontSize="{DynamicResource FontSizeSmall}"
                            TextWrapping="Wrap">
-                    <Run Text="This trainer is 100% free. If you paid money to get it, you have been scammed。"/>
+                    <Run Text="{DynamicResource CheatFreeNotice}"/>
                     <Hyperlink NavigateUri="https://discord.gg/rHzev9brJ3"
                                Foreground="{DynamicResource HyperlinkBrush}"
                                RequestNavigate="Hyperlink_OnRequestNavigate">&quot;Merika's Server&quot;</Hyperlink>
-                    <Run Text="Released on Discord" />
-                    <LineBreak/>
-                    <Run Text="Developed by @merikaaaaa on Discord. Anyone else claiming to be the developer is lying." />
+                    <Run Text="{DynamicResource DeveloperNotice}"/>
                 </TextBlock>
 
                 <StackPanel Grid.Column="1"
