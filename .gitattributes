@@ -1,0 +1,25 @@
+# https://git-scm.com/docs/gitattributes
+
+# 默认：文本文件统一 LF 入库、CRLF 检出（Windows 项目惯例）
+* text=auto eol=crlf
+
+# 明确按 LF 处理的文件
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+
+# 二进制文件不转换
+*.ico binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.snk binary
+*.pdb binary
+*.dll binary
+*.exe binary
+
+# GitHub 语言统计
+*.cs linguist-language=C#
+*.xaml linguist-language=XAML
