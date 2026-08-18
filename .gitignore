@@ -18,6 +18,8 @@ publish/
 *.log
 # OMX 运行时状态
 .omo/
+.zcode/
+TestResults/
 
 # macOS
 .DS_Store
