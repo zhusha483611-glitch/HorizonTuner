@@ -870,17 +870,19 @@ public partial class Handling
             config.CustomVelocityPresets,
             $"预设 {config.CustomVelocityPresets.Count + 1}");
 
-        var preset = new Models.VelocityPreset
-        {
-            Name = name,
-            Stage1Gamma = _velocityStage1Gamma,
-            Stage2Gamma = _velocityStage2Gamma,
-            Stage3Gamma = _velocityStage3Gamma,
-            Stage1Scale = _velocityStage1Scale,
-            Stage2Scale = _velocityStage2Scale,
-            Stage3Scale = _velocityStage3Scale,
-            CreatedTime = DateTime.Now
-        };
+        var profile = new Models.VelocityCurveProfile(
+            _velocityStage1Gamma,
+            _velocityStage2Gamma,
+            _velocityStage3Gamma,
+            _velocityStage1Scale,
+            _velocityStage2Scale,
+            _velocityStage3Scale,
+            _velocityStage1End,
+            _velocityStage2End,
+            _velocityStage1TargetFrac,
+            _velocityStage2TargetFrac);
+
+        var preset = Models.VelocityPresetEditing.CreateNew(name, profile, DateTime.Now);
 
         config.CustomVelocityPresets.Add(preset);
         _configStore.Save(config);
@@ -901,12 +903,17 @@ public partial class Handling
     {
         if (preset == null) return;
 
-        _velocityStage1Gamma = preset.Stage1Gamma;
-        _velocityStage2Gamma = preset.Stage2Gamma;
-        _velocityStage3Gamma = preset.Stage3Gamma;
-        _velocityStage1Scale = preset.Stage1Scale;
-        _velocityStage2Scale = preset.Stage2Scale;
-        _velocityStage3Scale = preset.Stage3Scale;
+        var profile = Models.VelocityPresetEditing.GetCurveProfile(preset);
+        _velocityStage1Gamma = profile.Stage1Gamma;
+        _velocityStage2Gamma = profile.Stage2Gamma;
+        _velocityStage3Gamma = profile.Stage3Gamma;
+        _velocityStage1Scale = profile.Stage1Scale;
+        _velocityStage2Scale = profile.Stage2Scale;
+        _velocityStage3Scale = profile.Stage3Scale;
+        _velocityStage1End = profile.Stage1End;
+        _velocityStage2End = profile.Stage2End;
+        _velocityStage1TargetFrac = profile.Stage1TargetFrac;
+        _velocityStage2TargetFrac = profile.Stage2TargetFrac;
 
         _suppressVelocityModeUiEvents = true;
         try
@@ -935,6 +942,10 @@ public partial class Handling
         config.VelocityStage1Scale = _velocityStage1Scale;
         config.VelocityStage2Scale = _velocityStage2Scale;
         config.VelocityStage3Scale = _velocityStage3Scale;
+        config.VelocityStage1End = _velocityStage1End;
+        config.VelocityStage2End = _velocityStage2End;
+        config.VelocityStage1TargetFrac = _velocityStage1TargetFrac;
+        config.VelocityStage2TargetFrac = _velocityStage2TargetFrac;
         Models.VelocityPresetUsage.MarkUsed(preset, DateTime.UtcNow);
         _configStore.Save(config);
     }

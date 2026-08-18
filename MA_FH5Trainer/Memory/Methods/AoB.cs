@@ -225,6 +225,17 @@ public partial class Mem
         return string.Join(" ", tokens);
     }
     
+    public static long AdvanceAddress(long baseAddress, long regionSize)
+    {
+        if (regionSize <= 0)
+        {
+            return baseAddress;
+        }
+
+        var maxAdvance = long.MaxValue - baseAddress;
+        return regionSize >= maxAdvance ? long.MaxValue : baseAddress + regionSize;
+    }
+
     private struct MemoryRegion
     {
         public IntPtr BaseAddress;
@@ -254,7 +265,7 @@ public partial class Mem
                 (memInfo.Protect & NoAccess) != 0 ||
                 (memInfo.Type is not (MemPrivate or MemImage)))
             {
-                currentAddress = IntPtr.Add((IntPtr)memInfo.BaseAddress, (int)memInfo.RegionSize);
+                currentAddress = (IntPtr)AdvanceAddress((long)memInfo.BaseAddress, memInfo.RegionSize);
                 continue;
             }
 
@@ -274,7 +285,7 @@ public partial class Mem
 
             if (!(isReadable || isWritable || isExecutable))
             {
-                currentAddress = IntPtr.Add((IntPtr)memInfo.BaseAddress, (int)memInfo.RegionSize);
+                currentAddress = (IntPtr)AdvanceAddress((long)memInfo.BaseAddress, memInfo.RegionSize);
                 continue;
             }
 
@@ -303,7 +314,7 @@ public partial class Mem
                 });
             }
 
-            currentAddress = IntPtr.Add((IntPtr)memInfo.BaseAddress, (int)memInfo.RegionSize);
+            currentAddress = (IntPtr)AdvanceAddress((long)memInfo.BaseAddress, memInfo.RegionSize);
         }
 
         return memoryRegions;

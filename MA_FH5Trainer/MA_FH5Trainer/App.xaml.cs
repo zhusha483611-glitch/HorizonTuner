@@ -49,15 +49,15 @@ public partial class App
         //HotkeysManager.SetupSystemHook();
     }
 
-    private async void App_OnExit(object sender, ExitEventArgs e)
+    private void App_OnExit(object sender, ExitEventArgs e)
     {
         AppShutdownState.BeginShutdown();
         HotkeysManager.ShutdownSystemHook();
-        await ShutdownCoordinator.StopAllAsync().ConfigureAwait(false);
-        DisconnectFromGame();
-        
-        await Host.StopAsync();
-        Host.Dispose();
+        AppShutdownActions.RunAsync(
+            () => ShutdownCoordinator.StopAllAsync(),
+            DisconnectFromGame,
+            () => Host.StopAsync(),
+            () => Host.Dispose()).GetAwaiter().GetResult();
     }
 
     protected override void OnStartup(StartupEventArgs e)
@@ -66,8 +66,8 @@ public partial class App
 
         if (createdNew)
         {
-            base.OnStartup(e);
             SetupExceptionHandling();
+            base.OnStartup(e);
         }
         else
         {

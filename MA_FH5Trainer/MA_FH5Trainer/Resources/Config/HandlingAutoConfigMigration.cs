@@ -164,7 +164,7 @@ public static class HandlingAutoConfigMigration
 
         var f1 = double.IsFinite(stage1TargetFrac) ? stage1TargetFrac : defaultStage1TargetFrac;
         var f2 = double.IsFinite(stage2TargetFrac) ? stage2TargetFrac : defaultStage2TargetFrac;
-        f1 = Math.Clamp(f1, 0.10, 0.95);
+        f1 = Math.Clamp(f1, 0.10, 0.94);
         f2 = Math.Clamp(f2, f1 + 0.05, 0.99);
 
         var changed = s1 != stage1End ||
@@ -194,6 +194,25 @@ public static class HandlingAutoConfigMigration
         if (preset.UseCount < 0)
         {
             preset.UseCount = 0;
+            changed = true;
+        }
+
+        var normalizedCurve = NormalizeVelocityCurveParams(
+            preset.Stage1End,
+            preset.Stage2End,
+            preset.Stage1TargetFrac,
+            preset.Stage2TargetFrac,
+            VelocityPresetEditing.DefaultStage1End,
+            VelocityPresetEditing.DefaultStage2End,
+            VelocityPresetEditing.DefaultStage1TargetFrac,
+            VelocityPresetEditing.DefaultStage2TargetFrac);
+
+        if (normalizedCurve.Changed)
+        {
+            preset.Stage1End = normalizedCurve.Stage1End;
+            preset.Stage2End = normalizedCurve.Stage2End;
+            preset.Stage1TargetFrac = normalizedCurve.Stage1TargetFrac;
+            preset.Stage2TargetFrac = normalizedCurve.Stage2TargetFrac;
             changed = true;
         }
 

@@ -10,6 +10,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorizonTuner", "MA_FH5Train
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Memory", "Memory\Memory.csproj", "{ACE634A9-48DE-48F2-9CA5-BEC1BC5D7164}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HorizonTuner.Tests", "HorizonTuner.Tests\HorizonTuner.Tests.csproj", "{538D3DB9-97BC-4329-8372-8A327703BE55}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -24,6 +26,10 @@ Global
 		{ACE634A9-48DE-48F2-9CA5-BEC1BC5D7164}.Debug|x64.Build.0 = Debug|x64
 		{ACE634A9-48DE-48F2-9CA5-BEC1BC5D7164}.Release|x64.ActiveCfg = Release|x64
 		{ACE634A9-48DE-48F2-9CA5-BEC1BC5D7164}.Release|x64.Build.0 = Release|x64
+		{538D3DB9-97BC-4329-8372-8A327703BE55}.Debug|x64.ActiveCfg = Debug|x64
+		{538D3DB9-97BC-4329-8372-8A327703BE55}.Debug|x64.Build.0 = Debug|x64
+		{538D3DB9-97BC-4329-8372-8A327703BE55}.Release|x64.ActiveCfg = Release|x64
+		{538D3DB9-97BC-4329-8372-8A327703BE55}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

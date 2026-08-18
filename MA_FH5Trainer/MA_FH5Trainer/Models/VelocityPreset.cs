@@ -56,6 +56,30 @@ public class VelocityPreset
     public double Stage3Scale { get; set; } = 0.7;
 
     /// <summary>
+    /// 第一段结束位置
+    /// </summary>
+    [JsonPropertyName("stage1End")]
+    public double Stage1End { get; set; } = 0.26;
+
+    /// <summary>
+    /// 第二段结束位置
+    /// </summary>
+    [JsonPropertyName("stage2End")]
+    public double Stage2End { get; set; } = 0.65;
+
+    /// <summary>
+    /// 第一段目标分数比例
+    /// </summary>
+    [JsonPropertyName("stage1TargetFrac")]
+    public double Stage1TargetFrac { get; set; } = 0.78;
+
+    /// <summary>
+    /// 第二段目标分数比例
+    /// </summary>
+    [JsonPropertyName("stage2TargetFrac")]
+    public double Stage2TargetFrac { get; set; } = 0.97;
+
+    /// <summary>
     /// 创建时间
     /// </summary>
     [JsonPropertyName("createdTime")]

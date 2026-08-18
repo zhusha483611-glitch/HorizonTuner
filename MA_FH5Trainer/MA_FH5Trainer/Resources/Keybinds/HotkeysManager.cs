@@ -8,17 +8,16 @@ namespace HorizonTuner.Resources.Keybinds;
 
 public static partial class HotkeysManager
 {
-    private static readonly List<GlobalHotkey> s_hotkeys = [];
+    private static readonly HotkeyRegistry s_hotkeys = new();
+    private static readonly AsyncSingleRunner s_checkRunner = new();
     private static readonly LowLevelKeyboardProc s_lowLevelProc = HookCallback;
     private static IntPtr s_hookId = IntPtr.Zero;
     private static readonly object s_hookLock = new object();
-    private static bool s_isCheckingHotkeys = false;
-    private static int s_hookRetryCount = 0;
     private const int MAX_HOOK_RETRIES = 3;
 
     public static void SaveAll()
     {
-        foreach (var hotkey in s_hotkeys)
+        foreach (var hotkey in s_hotkeys.Snapshot())
         {
             hotkey.Save();
         }
@@ -37,66 +36,46 @@ public static partial class HotkeysManager
                 return true;
             }
 
-            s_hookRetryCount = 0;
             return AttemptHookSetup();
         }
     }
 
     private static bool AttemptHookSetup()
     {
-        s_hookRetryCount++;
-        if (s_hookRetryCount >= MAX_HOOK_RETRIES)
+        Exception? lastException = null;
+
+        for (var attempt = 1; attempt <= MAX_HOOK_RETRIES; attempt++)
         {
-            MessageBox.Show($"Failed to setup hotkeys after {MAX_HOOK_RETRIES} attempts. Hotkeys will not work!\n\nLast error: {GetLastWin32ErrorMessage()}",
-                "HorizonTuner - Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            return false;
-        }
-
-        try
-        {
-            if (s_hookId != IntPtr.Zero)
+            try
             {
-                UnhookWindowsHookEx(s_hookId);
-                s_hookId = IntPtr.Zero;
-            }
-
-            s_hookId = SetHook(s_lowLevelProc);
-            if (s_hookId != IntPtr.Zero)
-            {
-                return true;
-            }
-
-            if (s_hookRetryCount >= MAX_HOOK_RETRIES)
-            {
-                return false;
-            }
-                
-            bool result = false;
-            Task.Delay(500).ContinueWith(_ => 
-            {
-                result = AttemptHookSetup();
-            });
-                    
-            return result;
-
-        }
-        catch (Exception ex)
-        {
-            if (s_hookRetryCount < MAX_HOOK_RETRIES)
-            {
-                bool result = false;
-                Task.Delay(500).ContinueWith(_ => 
+                if (s_hookId != IntPtr.Zero)
                 {
-                    result = AttemptHookSetup();
-                });
-                    
-                return result;
+                    UnhookWindowsHookEx(s_hookId);
+                    s_hookId = IntPtr.Zero;
+                }
+
+                s_hookId = SetHook(s_lowLevelProc);
+                if (s_hookId != IntPtr.Zero)
+                {
+                    return true;
+                }
             }
-                
-            MessageBox.Show($"Exception setting up hotkeys: {ex.Message}",
+            catch (Exception ex)
+            {
+                lastException = ex;
+            }
+        }
+
+        if (lastException != null)
+        {
+            MessageBox.Show($"Exception setting up hotkeys: {lastException.Message}",
                 "HorizonTuner - Error", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
+
+        MessageBox.Show($"Failed to setup hotkeys after {MAX_HOOK_RETRIES} attempts. Hotkeys will not work!\n\nLast error: {GetLastWin32ErrorMessage()}",
+            "HorizonTuner - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        return false;
     }
 
     /// <summary>
@@ -149,64 +128,57 @@ public static partial class HotkeysManager
     public static void Register(GlobalHotkey hotkey)
     {
         ArgumentNullException.ThrowIfNull(hotkey);
-        s_hotkeys.Add(hotkey);
-        hotkey.Load();
+        if (s_hotkeys.Register(hotkey))
+        {
+            hotkey.Load();
+        }
     }
 
     public static bool CheckExists(Key key, ModifierKeys modifierKeys)
     {
-        return s_hotkeys.Any(globalHotkey => globalHotkey.Key == key && globalHotkey.Modifier == modifierKeys);
+        return s_hotkeys.CheckExists(key, modifierKeys);
     }
 
-    private static readonly object s_checkLock = new object();
-
-    private static async void CheckHotkeys()
+    private static Task CheckHotkeysAsync()
     {
-        lock (s_checkLock)
+        return s_checkRunner.RunAsync(async () =>
         {
-            if (s_isCheckingHotkeys)
+            if (Application.Current == null)
             {
                 return;
             }
 
-            s_isCheckingHotkeys = true;
-        }
+            await Application.Current.Dispatcher.InvokeAsync(ExecuteHotkeysOnUiAsync).Task.Unwrap();
+        });
+    }
 
-        try
+    private static async Task ExecuteHotkeysOnUiAsync()
+    {
+        foreach (var hotkey in s_hotkeys.Snapshot())
         {
-            await Application.Current.Dispatcher.InvokeAsync(async () =>
+            if (Keyboard.Modifiers != hotkey.Modifier || hotkey.Key == Key.None || !hotkey.CanExecute)
             {
-                foreach (var hotkey in s_hotkeys)
+                continue;
+            }
+
+            if (hotkey.IsPressed)
+            {
+                continue;
+            }
+
+            hotkey.IsPressed = true;
+            try
+            {
+                while (Keyboard.IsKeyDown(hotkey.Key))
                 {
-                    if (Keyboard.Modifiers == hotkey.Modifier && hotkey.Key != Key.None && hotkey.CanExecute)
-                    {
-                        if (hotkey.IsPressed)
-                        {
-                            continue;
-                        }
-                            
-                        hotkey.IsPressed = true;
-                        while (Keyboard.IsKeyDown(hotkey.Key))
-                        {
-                            hotkey.Callback();
-                            await Task.Delay(hotkey.Interval);
-                        }
-                        hotkey.IsPressed = false;
-                    }
+                    hotkey.Callback();
+                    await Task.Delay(hotkey.Interval);
                 }
-            });
-        }
-        catch (TaskCanceledException)
-        {
-            // Ignore task cancellation
-        }
-        catch (Exception)
-        {
-            // ignored
-        }
-        finally
-        {
-            s_isCheckingHotkeys = false;
+            }
+            finally
+            {
+                hotkey.IsPressed = false;
+            }
         }
     }
 
@@ -247,10 +219,7 @@ public static partial class HotkeysManager
             return CallNextHookEx(s_hookId, nCode, wParam, lParam);
         }
 
-        if (!s_isCheckingHotkeys)
-        {
-            Task.Run(CheckHotkeys);
-        }
+        _ = CheckHotkeysAsync();
 
         return CallNextHookEx(s_hookId, nCode, wParam, lParam);
     }

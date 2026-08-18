@@ -10,14 +10,14 @@ public static class TriggerMath
 
     public static double CalculateTriggerU(byte trigger, byte threshold)
     {
+        if (threshold >= 254)
+        {
+            return trigger >= threshold ? 1d : 0d;
+        }
+
         if (trigger <= threshold)
         {
             return 0d;
-        }
-
-        if (threshold >= 254)
-        {
-            return 1d;
         }
 
         return Math.Clamp((trigger - threshold) / (double)(255 - threshold), 0d, 1d);

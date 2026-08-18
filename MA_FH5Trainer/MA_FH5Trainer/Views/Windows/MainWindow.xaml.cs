@@ -210,7 +210,7 @@ public partial class MainWindow
             config.WindowHeight = height;
         }
 
-        config.WindowState = WindowState.ToString();
+        config.WindowState = WindowStatePersistence.NormalizeForSave(WindowState).ToString();
         config.WindowLeft = bounds.Left;
         config.WindowTop = bounds.Top;
 
