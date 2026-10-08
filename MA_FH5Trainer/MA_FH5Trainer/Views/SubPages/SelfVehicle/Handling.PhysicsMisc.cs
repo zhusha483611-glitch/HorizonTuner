@@ -117,7 +117,7 @@ public partial class Handling
         {
             toggleSwitch.Toggled -= GravToggleSwitch_OnToggled;
             toggleSwitch.IsOn = false;
-            toggleSwitch.Toggled -= GravToggleSwitch_OnToggled;
+            toggleSwitch.Toggled += GravToggleSwitch_OnToggled;
             return;
         }
 

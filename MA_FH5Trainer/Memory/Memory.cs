@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Diagnostics;
 using System.Collections.Generic;
@@ -217,7 +217,14 @@ public partial class Mem
         foreach (var offset in enumerable)
         {
             finalAddress = ReadMemory<nuint>(finalAddress);
-            finalAddress += (nuint)(offset >= 0 ? offset : -offset);
+            if (offset >= 0)
+            {
+                finalAddress += (nuint)offset;
+            }
+            else
+            {
+                finalAddress -= (nuint)(-offset);
+            }
         }
         
         return finalAddress;
