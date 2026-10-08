@@ -500,7 +500,8 @@ public partial class PresetManagerViewModel : ObservableObject
         var nameBase = $"{SelectedPreset.Name} 副本";
         var uniqueName = VelocityPresetNaming.MakeUniqueName(_config.CustomVelocityPresets, nameBase);
 
-        var preset = VelocityPresetEditing.CreateNew(uniqueName, edit, DateTime.Now);
+        var profile = VelocityPresetEditing.MergeCurveProfile(SelectedPreset.Preset, edit);
+        var preset = VelocityPresetEditing.CreateNew(uniqueName, profile, DateTime.Now);
 
         _config.CustomVelocityPresets.Add(preset);
         var item = new PresetListItemViewModel(preset);

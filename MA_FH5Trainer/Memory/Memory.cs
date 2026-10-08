@@ -99,31 +99,7 @@ public partial class Mem
 
     public static bool EnableSeDebugPrivilege()
     {
-        if (!IsAdministrator())
-        {
-            return false;
-        }
-
-        if (!OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, out IntPtr hToken))
-        {
-            return false;
-        }
-
-        if (!LookupPrivilegeValue(null!, SE_DEBUG_NAME, out LUID luid))
-        {
-            return false;
-        }
-
-        TOKEN_PRIVILEGES tp = new TOKEN_PRIVILEGES
-        {
-            PrivilegeCount = 1,
-            Luid = luid,
-            Attributes = SE_PRIVILEGE_ENABLED
-        };
-
-        bool result = AdjustTokenPrivileges(hToken, false, ref tp, 0, IntPtr.Zero, IntPtr.Zero);
-        Marshal.FreeHGlobal(hToken);
-        return result;
+        return SeDebugPrivilegeHelper.Enable();
     }
 
     private static bool IsAdministrator()

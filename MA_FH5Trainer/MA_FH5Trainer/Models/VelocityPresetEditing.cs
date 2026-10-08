@@ -6,6 +6,10 @@ public static class VelocityPresetEditing
     public const double GammaMax = 10;
     public const double ScalePercentMin = 0;
     public const double ScalePercentMax = 100;
+    public const double DefaultStage1End = 0.26;
+    public const double DefaultStage2End = 0.65;
+    public const double DefaultStage1TargetFrac = 0.78;
+    public const double DefaultStage2TargetFrac = 0.97;
 
     public static bool TryValidate(VelocityPresetEdit edit, out string error)
     {
@@ -41,20 +45,59 @@ public static class VelocityPresetEditing
 
     public static VelocityPreset CreateNew(string name, VelocityPresetEdit edit, DateTime createdTimeLocal)
     {
+        return CreateNew(name, MergeCurveProfile(new VelocityPreset(), edit), createdTimeLocal);
+    }
+
+    public static VelocityPreset CreateNew(string name, VelocityCurveProfile profile, DateTime createdTimeLocal)
+    {
         return new VelocityPreset
         {
             Id = Guid.NewGuid().ToString("N"),
             Name = name,
-            Stage1Gamma = edit.Stage1Gamma,
-            Stage2Gamma = edit.Stage2Gamma,
-            Stage3Gamma = edit.Stage3Gamma,
-            Stage1Scale = ToScale01(edit.Stage1ScalePercent),
-            Stage2Scale = ToScale01(edit.Stage2ScalePercent),
-            Stage3Scale = ToScale01(edit.Stage3ScalePercent),
+            Stage1Gamma = profile.Stage1Gamma,
+            Stage2Gamma = profile.Stage2Gamma,
+            Stage3Gamma = profile.Stage3Gamma,
+            Stage1Scale = profile.Stage1Scale,
+            Stage2Scale = profile.Stage2Scale,
+            Stage3Scale = profile.Stage3Scale,
+            Stage1End = profile.Stage1End,
+            Stage2End = profile.Stage2End,
+            Stage1TargetFrac = profile.Stage1TargetFrac,
+            Stage2TargetFrac = profile.Stage2TargetFrac,
             CreatedTime = createdTimeLocal,
             UseCount = 0,
             LastUsedTimeUtc = null
         };
+    }
+
+    public static VelocityCurveProfile GetCurveProfile(VelocityPreset preset)
+    {
+        return new VelocityCurveProfile(
+            preset.Stage1Gamma,
+            preset.Stage2Gamma,
+            preset.Stage3Gamma,
+            preset.Stage1Scale,
+            preset.Stage2Scale,
+            preset.Stage3Scale,
+            preset.Stage1End,
+            preset.Stage2End,
+            preset.Stage1TargetFrac,
+            preset.Stage2TargetFrac);
+    }
+
+    public static VelocityCurveProfile MergeCurveProfile(VelocityPreset preset, VelocityPresetEdit edit)
+    {
+        return new VelocityCurveProfile(
+            edit.Stage1Gamma,
+            edit.Stage2Gamma,
+            edit.Stage3Gamma,
+            ToScale01(edit.Stage1ScalePercent),
+            ToScale01(edit.Stage2ScalePercent),
+            ToScale01(edit.Stage3ScalePercent),
+            preset.Stage1End,
+            preset.Stage2End,
+            preset.Stage1TargetFrac,
+            preset.Stage2TargetFrac);
     }
 
     private static double ToScale01(double percent)

@@ -13,6 +13,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using HorizonTuner.Cheats;
 using HorizonTuner.Models;
+using HorizonTuner.Resources;
 using HorizonTuner.Resources.Keybinds;
 using HorizonTuner.Resources.Theme;
 using Memory;
@@ -383,11 +384,11 @@ public partial class MainWindowViewModel : ObservableObject
 
     private void DetachFromGame()
     {
-        var coll = g_CachedInstances.Where(kv => typeof(ICheatsBase).IsAssignableFrom(kv.Key));
-        foreach (var cheatInstance in coll)
-        {
-            ((ICheatsBase)cheatInstance.Value).Reset();
-        }
+        var coll = g_CachedInstances
+            .Where(kv => typeof(ICheatsBase).IsAssignableFrom(kv.Key))
+            .Select(kv => kv.Value)
+            .ToArray();
+        CheatLifecycle.CleanupAndResetAll(coll);
 
         try
         {

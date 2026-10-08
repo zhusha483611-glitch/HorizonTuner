@@ -15,10 +15,20 @@ public partial class Handling
         if (MainWindow.Instance != null)
         {
             var viewModel = MainWindow.Instance.ViewModel;
-            viewModel.Hotkeys.Add(_velocityHotkey);
-            viewModel.Hotkeys.Add(_wheelspeedHotkey);
-            viewModel.Hotkeys.Add(_jumpHackHotkey);
-            viewModel.Hotkeys.Add(_brakeHackHotkey);
+            AddHotkeyIfMissing(viewModel.Hotkeys, _velocityHotkey);
+            AddHotkeyIfMissing(viewModel.Hotkeys, _wheelspeedHotkey);
+            AddHotkeyIfMissing(viewModel.Hotkeys, _jumpHackHotkey);
+            AddHotkeyIfMissing(viewModel.Hotkeys, _brakeHackHotkey);
         }
+    }
+
+    private static void AddHotkeyIfMissing(System.Collections.ObjectModel.ObservableCollection<GlobalHotkey> hotkeys, GlobalHotkey hotkey)
+    {
+        if (hotkeys.Any(existing => string.Equals(existing.Name, hotkey.Name, StringComparison.Ordinal)))
+        {
+            return;
+        }
+
+        hotkeys.Add(hotkey);
     }
 }

@@ -4,10 +4,10 @@ using static HorizonTuner.Resources.Memory;
 
 namespace HorizonTuner.Cheats.ForzaHorizon5;
 
-public class Sql : CheatsUtilities, ICheatsBase
+public class Sql : CheatsUtilities, ICheatsBase, ISqlCheat
 {
     private UIntPtr _cDatabaseAddress, _ptr;
-    public bool WereScansSuccessful;
+    public bool WereScansSuccessful { get; private set; }
 
     public async Task SqlExecAobScan()
     {
@@ -40,7 +40,7 @@ public class Sql : CheatsUtilities, ICheatsBase
         return result;
     }
     
-    public async void Query(string command)
+    public async Task QueryAsync(string command)
     {
         var memory = GetInstance();
         var procHandle = memory.MProc.Handle;
@@ -55,7 +55,7 @@ public class Sql : CheatsUtilities, ICheatsBase
             ShowError("SQL", "_ptr == 0");
             return;
         }
-        
+
         var rcx = _ptr;
         const int virtualFunctionIndex = 9;
         var callFunction = GetVirtualFunctionPtr(_ptr, virtualFunctionIndex);
@@ -71,16 +71,33 @@ public class Sql : CheatsUtilities, ICheatsBase
             ShowError("SQL", "mainMod == null");
             return;
         }
-        
-        var shellCodeAddress = (UIntPtr)mainMod.BaseAddress + 0x1000;  
+
+        using var cleanup = new CleanupScope();
+
+        var shellCodeAddress = (UIntPtr)mainMod.BaseAddress + 0x1000;
         var jmpShellcodeaddr = Imps.VirtualAllocEx(procHandle, 0, 0x1000, 0x3000, 0x40);
+        if (jmpShellcodeaddr != UIntPtr.Zero)
+        {
+            cleanup.Push(() => Free(jmpShellcodeaddr));
+        }
+
         var rdx = Imps.VirtualAllocEx(procHandle, 0, 0x1000, 0x3000, 0x40);
+        if (rdx != UIntPtr.Zero)
+        {
+            cleanup.Push(() => Free(rdx));
+        }
+
         var r8 = Imps.VirtualAllocEx(procHandle, 0, 0x1000, 0x3000, 0x40);
+        if (r8 != UIntPtr.Zero)
+        {
+            cleanup.Push(() => Free(r8));
+        }
+
         var rcxBytes = BitConverter.GetBytes(rcx.ToUInt64());
         var rdxBytes = BitConverter.GetBytes(rdx.ToUInt64());
         var r8Bytes = BitConverter.GetBytes(r8.ToUInt64());
         var callBytes = BitConverter.GetBytes(callFunction.ToUInt64());
-        
+
         byte[] shellCode =
         [
             0x51, 0x52, 0x41, 0x50, 0x41, 0x51, 0x48, 0x83, 0xEC, 0x28, 0x48, 0xB9, rcxBytes[0], rcxBytes[1], rcxBytes[2], rcxBytes[3], rcxBytes[4], rcxBytes[5], rcxBytes[6], rcxBytes[7], 0x48, 0xBA, rdxBytes[0], rdxBytes[1], rdxBytes[2], rdxBytes[3],
@@ -95,17 +112,22 @@ public class Sql : CheatsUtilities, ICheatsBase
             ShowError("SQL", "memory.ChangeProtection(shellCodeAddress, Imps.MemoryProtection.ExecuteReadWrite, out var old)");
             return;
         }
-        
+
+        cleanup.Push(() =>
+        {
+            _ = memory.ChangeProtection(shellCodeAddress, old, out _);
+        });
+
         memory.WriteStringMemory(r8, command + "\0");
         memory.WriteArrayMemory(shellCodeAddress, shellCode);
-        
+
         var jmpBytes = BitConverter.GetBytes(shellCodeAddress.ToUInt64());
         byte[] jmpShellcode =
         [
             0xFF, 0x25, 0x00, 0x00, 0x00, 0x00, jmpBytes[0], jmpBytes[1], jmpBytes[2], jmpBytes[3],
             jmpBytes[4], jmpBytes[5], jmpBytes[6], jmpBytes[7]
         ];
-        
+
         memory.WriteArrayMemory(jmpShellcodeaddr, jmpShellcode);
         var thread = Imports.CreateRemoteThread(procHandle, 0, 0, jmpShellcodeaddr, rcx, 0, out _);
         if (thread is 0 or -1)
@@ -113,18 +135,9 @@ public class Sql : CheatsUtilities, ICheatsBase
             ShowError("SQL", "thread == 0 || thread == -1");
             return;
         }
-        
+
+        cleanup.Push(() => Imports.CloseHandle(thread));
         _ = Imports.WaitForSingleObject(thread, int.MaxValue);
-        if (!memory.ChangeProtection(shellCodeAddress, old, out old))
-        {
-            ShowError("SQL", "memory.ChangeProtection(shellCodeAddress, old, out old)");
-            return;
-        }
-        
-        Imports.CloseHandle(thread);
-        Free(jmpShellcodeaddr);
-        Free(r8);
-        Free(rdx);
     }
 
     public void Cleanup()

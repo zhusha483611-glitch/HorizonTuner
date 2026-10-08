@@ -20,7 +20,7 @@ public partial class AutoshowViewModel : ObservableObject
     [ObservableProperty]
     private bool _freeCarsEnabled;
     
-    private static Cheats.ForzaHorizon5.Sql SqlFh5 => GetClass<Cheats.ForzaHorizon5.Sql>();
+    private static Cheats.ForzaHorizon5.ISqlCheat SqlFh5 => GetClass<Cheats.ForzaHorizon5.Sql>();
 
     [RelayCommand]
     private async Task ExecuteSql(object parameter)
@@ -40,16 +40,8 @@ public partial class AutoshowViewModel : ObservableObject
         UiElementsEnabled = true;
     }
 
-    private static async Task Query(string command)
+    private static Task Query(string command)
     {
-        if (!SqlFh5.WereScansSuccessful)
-        {
-            await SqlFh5.SqlExecAobScan();
-        }
-
-        if (SqlFh5.WereScansSuccessful)
-        {
-            await Task.Run(() => SqlFh5.Query(command));
-        }
+        return AutoshowSqlRunner.RunAsync(SqlFh5, command);
     }
 }

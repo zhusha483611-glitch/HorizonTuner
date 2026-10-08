@@ -49,6 +49,12 @@ public partial class GlobalHotkey : ObservableObject
         var data = new HotkeyData(Modifier.ToString(),Key.ToString());
         string json = JsonSerializer.Serialize(data);
         string path = GetSavePath();
+        var dir = Path.GetDirectoryName(path);
+        if (!string.IsNullOrWhiteSpace(dir))
+        {
+            Directory.CreateDirectory(dir);
+        }
+
         File.WriteAllText(path, json);
     }
 
@@ -82,8 +88,6 @@ public partial class GlobalHotkey : ObservableObject
 
     private string GetSavePath()
     {
-        string tempDir = Path.Combine(Path.GetTempPath(), "GlobalHotkeys");
-        Directory.CreateDirectory(tempDir);
-        return Path.Combine(tempDir, $"{Name}.json");
+        return HotkeyStoragePaths.GetSavePath(Name);
     }
 }

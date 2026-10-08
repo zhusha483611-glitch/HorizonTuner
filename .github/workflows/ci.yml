@@ -4,6 +4,11 @@ on:
   push:
     branches: [main, master]
   pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-test:
@@ -18,11 +23,18 @@ jobs:
           dotnet-version: "8.0.x"
 
       - name: Restore
-        run: dotnet restore MA_FH5Trainer/HorizonTuner.sln
+        run: dotnet restore MA_FH5Trainer/HorizonTuner.sln -p:Platform=x64
 
       - name: Build
-        run: dotnet build MA_FH5Trainer/HorizonTuner.sln --configuration Release --no-restore
+        run: dotnet build MA_FH5Trainer/HorizonTuner.sln --configuration Release --no-restore -p:Platform=x64
 
-      # 测试项目已移除（曾覆盖转换器/配置迁移/预设/节流动作），重建后恢复：
-      # - name: Test
-      #   run: dotnet test MA_FH5Trainer/HorizonTuner.sln --configuration Release --no-build --logger "trx;LogFileName=test-results.trx"
+      - name: Test
+        run: dotnet test MA_FH5Trainer/HorizonTuner.sln --configuration Release --no-build --no-restore -p:Platform=x64 --logger "trx;LogFileName=test-results.trx" --results-directory TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: TestResults/*.trx
+          if-no-files-found: ignore

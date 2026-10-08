@@ -224,7 +224,7 @@ public partial class Handling
 
         FlushHandlingConfigSave();
 
-        await StopAllAutomationAsync().ConfigureAwait(false);
+        await StopAllAutomationAsync();
 
         ViewModel.PropertyChanged -= ViewModel_OnPropertyChanged;
         _handlingConfigSaveTimer.Stop();
