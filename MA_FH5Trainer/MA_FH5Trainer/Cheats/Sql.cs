@@ -1,4 +1,5 @@
-﻿using HorizonTuner.Resources;
+using System.Text;
+using HorizonTuner.Resources;
 using Memory;
 using static HorizonTuner.Resources.Memory;
 
@@ -69,6 +70,15 @@ public class Sql : CheatsUtilities, ICheatsBase, ISqlCheat
         if (mainMod == null)
         {
             ShowError("SQL", "mainMod == null");
+            return;
+        }
+
+        // The command is written into a 0x1000-byte remote buffer (r8) as UTF-8.
+        // Reject commands that would overflow it (buffer safety + defense-in-depth
+        // against any future caller that builds SQL from untrusted input).
+        if (Encoding.UTF8.GetByteCount(command) + 1 > 0x1000)
+        {
+            ShowError("SQL", "command too long for remote buffer");
             return;
         }
 
