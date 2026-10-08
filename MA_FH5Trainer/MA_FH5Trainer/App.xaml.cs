@@ -19,6 +19,7 @@ public partial class App
 {
     private const string MutexName = "{(4A771E61-6684-449F-8952-B31582A8877E)}";
     private Mutex _mutex = null!;
+    private static int s_cleanupStarted;
 
     private static readonly IHost Host = Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder()
         .ConfigureAppConfiguration(c =>
@@ -82,6 +83,8 @@ public partial class App
         AppDomain.CurrentDomain.UnhandledException += (_, e) =>
             ReportException((Exception)e.ExceptionObject, "AppDomain.CurrentDomain.UnhandledException");
 
+        AppDomain.CurrentDomain.ProcessExit += (_, _) => BestEffortCleanup();
+
         DispatcherUnhandledException += (_, e) =>
         {
             ReportException(e.Exception, "Application.Current.DispatcherUnhandledException");
@@ -103,7 +106,8 @@ public partial class App
             0,
             MessageBoxImage.Error
         );
-        
+
+        BestEffortCleanup();
         Environment.Exit(1);
     }
 
@@ -131,5 +135,48 @@ public partial class App
             ((ICheatsBase)cheatInstance.Value).Cleanup();
         }
         _ = Imports.CloseHandle(HorizonTuner.Resources.Memory.GetInstance().MProc.Handle);
+    }
+
+    /// <summary>
+    /// Best-effort cleanup on crash or abnormal exit: signals background loops to stop,
+    /// then attempts to restore game patches and release the code cave within a hard
+    /// timeout so a blocking <see cref="ICheatsBase.Cleanup"/> cannot hang the exit path.
+    /// Idempotent via <see cref="Interlocked.Exchange"/>; safe to call from
+    /// <see cref="AppDomain.ProcessExit"/> and <see cref="ReportException"/> without
+    /// double-cleanup. Without this, a crash leaves the game patched (S3).
+    /// </summary>
+    private static void BestEffortCleanup()
+    {
+        if (Interlocked.Exchange(ref s_cleanupStarted, 1) != 0)
+        {
+            return;
+        }
+
+        AppShutdownState.BeginShutdown();
+
+        try
+        {
+            var done = new ManualResetEventSlim(false);
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                try
+                {
+                    DisconnectFromGame();
+                }
+                catch (Exception)
+                {
+                    // Best-effort: swallow to ensure the exit path still proceeds.
+                }
+                finally
+                {
+                    done.Set();
+                }
+            });
+            done.Wait(TimeSpan.FromSeconds(3));
+        }
+        catch (Exception)
+        {
+            // Best-effort: swallow to ensure the exit path still proceeds.
+        }
     }
 }
