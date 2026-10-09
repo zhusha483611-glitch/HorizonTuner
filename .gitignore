@@ -2,10 +2,12 @@
 bin/
 obj/
 publish/
+*_wpftmp.csproj
 
 # 工具索引 / 运行时状态
 .codegraph/
 .omc/
+.workbuddy/
 
 # Visual Studio / IDE
 .vs/
