@@ -42,7 +42,36 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
     public UIntPtr NoClipDetourAddress;
     private UIntPtr _racePtr;
 
+    // 本地玩家 detour 的维护门：该资源被 7 个轮询循环与 5 个 UI 懒初始化入口共享，
+    // 并发重建会泄漏代码洞并反复重写游戏活代码，必须收敛为单写者。
+    private readonly SemaphoreSlim _localPlayerDetourMaintenance = new(1, 1);
+
     public async Task<bool> CheatLocalPlayer()
+    {
+        // 折叠重复重建：并发调用者中已有活动钩子时直接复用（另一线程刚建成）。
+        if (LocalPlayerHookDetourAddress > UIntPtr.Zero && IsLocalPlayerHookActive())
+        {
+            return true;
+        }
+
+        await _localPlayerDetourMaintenance.WaitAsync().ConfigureAwait(false);
+        try
+        {
+            // 门内二次检查：等待期间另一线程可能已完成重建。
+            if (LocalPlayerHookDetourAddress > UIntPtr.Zero && IsLocalPlayerHookActive())
+            {
+                return true;
+            }
+
+            return await RebuildLocalPlayerDetourAsync().ConfigureAwait(false);
+        }
+        finally
+        {
+            _localPlayerDetourMaintenance.Release();
+        }
+    }
+
+    private async Task<bool> RebuildLocalPlayerDetourAsync()
     {
         _localPlayerHookAddress = 0;
         LocalPlayerHookDetourAddress = 0;
@@ -525,6 +554,12 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
             return false;
         }
 
+        // 重建（维护）进行中：不抢写，交由下个 tick 重试——避免 reapply 与 rebuild 互相覆盖。
+        if (!_localPlayerDetourMaintenance.Wait(0))
+        {
+            return false;
+        }
+
         try
         {
             var mem = GetInstance();
@@ -534,6 +569,10 @@ public class CarCheats : CheatsUtilities, ICheatsBase, IRevertBase
         catch
         {
             return false;
+        }
+        finally
+        {
+            _localPlayerDetourMaintenance.Release();
         }
     }
 }

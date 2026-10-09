@@ -249,14 +249,19 @@ public partial class Handling
         _brakePrevDown = false;
         _brakeAssistPrevDown = false;
 
-        await CancelLoopAsync(ref _velocityAutoCts, ref _velocityAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _velocityLinearAutoCts, ref _velocityLinearAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _velocityMultiStageAutoCts, ref _velocityMultiStageAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _wheelspeedAutoCts, ref _wheelspeedAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _jumpAutoCts, ref _jumpAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _brakeAutoCts, ref _brakeAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _brakeAssistAutoCts, ref _brakeAssistAutoTask, 500).ConfigureAwait(false);
-        await CancelLoopAsync(ref _gamepadStatusCts, ref _gamepadStatusTask, 500).ConfigureAwait(false);
+        // 并发取消：顺序等待 8×500ms 最坏 4s，会在 ShutdownCoordinator(3s) 预算内停不完。
+        var cancellations = new Task[]
+        {
+            CancelLoopAsync(ref _velocityAutoCts, ref _velocityAutoTask, 500),
+            CancelLoopAsync(ref _velocityLinearAutoCts, ref _velocityLinearAutoTask, 500),
+            CancelLoopAsync(ref _velocityMultiStageAutoCts, ref _velocityMultiStageAutoTask, 500),
+            CancelLoopAsync(ref _wheelspeedAutoCts, ref _wheelspeedAutoTask, 500),
+            CancelLoopAsync(ref _jumpAutoCts, ref _jumpAutoTask, 500),
+            CancelLoopAsync(ref _brakeAutoCts, ref _brakeAutoTask, 500),
+            CancelLoopAsync(ref _brakeAssistAutoCts, ref _brakeAssistAutoTask, 500),
+            CancelLoopAsync(ref _gamepadStatusCts, ref _gamepadStatusTask, 500)
+        };
+        await Task.WhenAll(cancellations).ConfigureAwait(false);
 
         var address = _carCheats.LocalPlayerHookDetourAddress;
         if (address > UIntPtr.Zero)
